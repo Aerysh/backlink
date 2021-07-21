@@ -3,7 +3,7 @@
 @section('title','Marketplace')
 
 @section('content')
-    <div class="section pt-5 container">
+    <div class="section py-5 container border-bottom">
         <div class="row">
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Paling Laris</h5>
@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="section container">
+    <div class="section py-5 container border-top">
         <div class="row">
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Terbaru</h5>
