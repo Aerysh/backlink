@@ -52,7 +52,7 @@
 
                             {{-- Link --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Kontak Kami</a>
+                                <a class="nav-link" href="{{route('info.contact')}}">Kontak Kami</a>
                             </li>
                             {{-- End Link --}}
                         </ul>
@@ -159,7 +159,7 @@
                     {{-- Row --}}
                     <div class="row text-center d-flex justify-content-center pt-5">
                         {{-- Col --}}
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <h6 class="text-uppercase font-weight-bold">
                                 <a href="#!" class="text-white text-decoration-none">About Us</a>
                             </h6>
@@ -167,7 +167,7 @@
                         {{-- End Col --}}
 
                         {{-- Col --}}
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <h6 class="text-uppercase font-weight-bold ">
                                 <a href="#!" class="text-white text-decoration-none">TOS</a>
                             </h6>
@@ -175,7 +175,7 @@
                         {{-- End Col --}}
 
                         {{-- Col --}}
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <h6 class="text-uppercase font-weight-bold">
                                 <a href="#!" class="text-white text-decoration-none">Privacy</a>
                             </h6>
@@ -183,7 +183,7 @@
                         {{-- End Col --}}
 
                         {{-- Col --}}
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <h6 class="text-uppercase font-weight-bold">
                                 <a href="#!" class="text-white text-decoration-none">Refund</a>
                             </h6>

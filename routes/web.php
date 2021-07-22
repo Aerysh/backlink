@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,3 +32,6 @@ Route::prefix('buyer')->group(function () {
     Route::view('/order', 'buyer.order')->name('buyer.user_order');
 });
 
+Route::prefix('info')->group(function () {
+    Route::view('contact', 'info.contact')->name('info.contact');
+});
