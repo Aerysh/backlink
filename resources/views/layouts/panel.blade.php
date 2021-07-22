@@ -18,7 +18,7 @@
             <div class="row">
                 {{-- Sidebar --}}
                 <div class="col-md-3">
-                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark mb-3" style="width: 100%;">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark mb-3 w-100">
                         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-4">Logo</span>
                         </a>
@@ -38,5 +38,5 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/css/sidebar.css')}}">
+
 @endsection

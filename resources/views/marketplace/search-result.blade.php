@@ -47,7 +47,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-stripped table-hover text-center" style="width: 100%">
+                                <table class="table table-stripped table-hover text-center w-100">
                                     <thead>
                                         <tr>
                                             <th>Website</th>

@@ -52,7 +52,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-responsive table-hover" style="width: 100%;">
+                                <table class="table table-responsive table-hover w-100">
                                     <thead>
                                         <tr>
                                             <th>Website</th>

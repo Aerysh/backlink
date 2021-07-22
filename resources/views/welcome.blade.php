@@ -9,12 +9,12 @@
                 <div class="text-end col-md-6 mb-3">
                     <h1 class="fw-light">Beli Layanan <b>Berkualitas</b></h1>
                     <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <a href="/marketplace" class="btn btn-info" style="color: white">Marketplace</a>
+                    <a href="/marketplace" class="btn btn-info text-white">Marketplace</a>
                 </div>
                 <div class="text-start col-md-6 mb-3">
                     <h1 class="fw-light">Daftarkan & Dapatkan <b>Uang</b></h1>
                     <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <a href="/publish" class="btn btn-info" style="color: white">Daftarkan</a>
+                    <a href="/publish" class="btn btn-info text-white">Daftarkan</a>
                 </div>
             </div>
         </div>

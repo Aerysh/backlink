@@ -14,7 +14,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <small><a href="{{route('login')}}" class="text-muted py-3" style="text-decoration: none;"><i class="fas fa-chevron-left fa-s"></i> Kembali</a></small>
+                    <small><a href="{{route('login')}}" class="text-muted py-3 text-decoration-none"><i class="fas fa-chevron-left fa-s"></i> Kembali</a></small>
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Reset Password</h5>

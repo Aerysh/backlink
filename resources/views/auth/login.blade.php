@@ -10,7 +10,7 @@
                 <div class="col-md-4 mb-3">
                 </div>
                 <div class="col-md-4 mb-3 position-absolute top-50 start-50 translate-middle">
-                    <small><a href="/" class="text-muted py-3" style="text-decoration: none;"><i class="fas fa-chevron-left fa-s"></i> Kembali</a></small>
+                    <small><a href="/" class="text-muted py-3 text-decoration-none"><i class="fas fa-chevron-left fa-s"></i> Kembali</a></small>
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Masuk</h5>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <button type="submit" id="submit" class="btn btn-primary" name="submit">Login</button>
-                                    &#9;<small>Belum Punya Akun ? <a href="{{route('register')}}" style="text-decoration: none;">Register</a></small>
+                                    &#9;<small>Belum Punya Akun ? <a href="{{route('register')}}" class="text-decoration-none">Register</a></small>
                                 </div>
                             </form>
                         </div>
