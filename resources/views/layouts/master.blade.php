@@ -40,7 +40,7 @@
 
                             {{-- Link --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('publish.index')}}">Jual Backlink</a>
+                                <a class="nav-link" href="{{route('publish.index')}}">Jual</a>
                             </li>
                             {{-- End Link --}}
 
