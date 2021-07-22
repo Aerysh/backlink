@@ -4,10 +4,12 @@
 
 @section('content')
     <div class="section py-5 bg-light border-bottom">
-        <div class="section row my-5">
-            <div class="col-md-12 d-flex justify-content-center">
-                <div class="text-center">
-                    <h1 class="display-3">Kontak Kami</h1>
+        <div class="container">
+            <div class="section row my-5 px-0">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <h1 class="display-3">Kontak Kami</h1>
+                    </div>
                 </div>
             </div>
         </div>
