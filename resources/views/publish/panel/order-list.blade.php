@@ -46,41 +46,47 @@
                         <table class="table table-hover text-center w-100">
                             <thead>
                                 <tr>
-                                    <th>Order</th>
-                                    <th>Website</th>
-                                    <th>Harga</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th>Detail</th>
+                                    <th>    Order   </th>
+                                    <th>    Website </th>
+                                    <th>    Harga   </th>
+                                    <th>    Tanggal </th>
+                                    <th>    Status  </th>
+                                    <th>    Detail  </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>UV68EQVW</td>
-                                    <td>aerysh.xyz</td>
-                                    <td>Rp. 50000</td>
-                                    <td>19 Jul 2021</td>
-                                    <td><span class="badge bg-secondary">Belum Selesai</span></td>
+                                    <td>    UV68EQVW    </td>
+                                    <td>    aerysh.xyz  </td>
+                                    <td>    Rp. 50000   </td>
+                                    <td>    19 Jul 2021 </td>
+                                    <td>
+                                        <span class="badge bg-secondary">Belum Selesai</span>
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-outline-primary">Detail</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>3MFDZBBR</td>
-                                    <td>google.com</td>
-                                    <td>Rp. 150000</td>
-                                    <td>15 Jul 2021</td>
-                                    <td><span class="badge bg-secondary">Belum Selesai</span></td>
+                                    <td>    3MFDZBBR    </td>
+                                    <td>    google.com  </td>
+                                    <td>    Rp. 150000  </td>
+                                    <td>    15 Jul 2021 </td>
+                                    <td>
+                                        <span class="badge bg-secondary">Belum Selesai</span>
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-outline-primary">Detail</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Y0DNXTFN</td>
-                                    <td>facebook.com</td>
-                                    <td>Rp. 100000</td>
-                                    <td>13 Jul 2021</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
+                                    <td>    Y0DNXTFN        </td>
+                                    <td>    facebook.com    </td>
+                                    <td>    Rp. 100000      </td>
+                                    <td>    13 Jul 2021     </td>
+                                    <td>
+                                        <span class="badge bg-success">Selesai</span>
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-outline-primary">Detail</a>
                                     </td>

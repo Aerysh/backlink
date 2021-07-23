@@ -50,12 +50,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Y0DNXTFN</td>
-                                    <td>facebook.com</td>
-                                    <td>Rp. 100000</td>
-                                    <td>13 Jul 2021</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
-                                    <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                                    <td>    Y0DNXTFN    </td>
+                                    <td>    facebook.com</td>
+                                    <td>    Rp. 100000  </td>
+                                    <td>    13 Jul 2021 </td>
+                                    <td>
+                                        <span class="badge bg-success">Selesai</span>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-outline-primary">Detail</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

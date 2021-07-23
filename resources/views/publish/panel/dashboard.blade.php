@@ -82,30 +82,36 @@
                         <table class="table table-hover text-center w-100">
                             <thead>
                                 <tr>
-                                    <th>Website</th>
-                                    <th>Harga</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
+                                    <th>    Website </th>
+                                    <th>    Harga   </th>
+                                    <th>    Tanggal </th>
+                                    <th>    Status  </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>aerysh.xyz</td>
-                                    <td>Rp. 50000</td>
-                                    <td>19 Jul 2021</td>
-                                    <td><span class="badge bg-secondary">Belum Selesai</span></td>
+                                    <td>    aerysh.xyz  </td>
+                                    <td>    Rp. 50000   </td>
+                                    <td>    19 Jul 2021 </td>
+                                    <td>
+                                        <span class="badge bg-secondary">Belum Selesai</span>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>google.com</td>
-                                    <td>Rp. 150000</td>
-                                    <td>15 Jul 2021</td>
-                                    <td><span class="badge bg-secondary">Belum Selesai</span></td>
+                                    <td>    google.com  </td>
+                                    <td>    Rp. 150000  </td>
+                                    <td>    15 Jul 2021 </td>
+                                    <td>
+                                        <span class="badge bg-secondary">Belum Selesai</span>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>facebook.com</td>
-                                    <td>Rp. 100000</td>
-                                    <td>13 Jul 2021</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
+                                    <td>    facebook.com    </td>
+                                    <td>    Rp. 100000      </td>
+                                    <td>    13 Jul 2021     </td>
+                                    <td>
+                                        <span class="badge bg-success">Selesai</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

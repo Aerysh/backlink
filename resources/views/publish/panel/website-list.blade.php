@@ -55,22 +55,22 @@
                                 <table class="table table-responsive table-hover w-100">
                                     <thead>
                                         <tr>
-                                            <th>Website</th>
-                                            <th>Kategori</th>
-                                            <th>DA</th>
-                                            <th>PA</th>
-                                            <th>Harga</th>
-                                            <th>Status</th>
-                                            <th>Edit</th>
+                                            <th>    Website </th>
+                                            <th>    Kategori</th>
+                                            <th>    DA      </th>
+                                            <th>    PA      </th>
+                                            <th>    Harga   </th>
+                                            <th>    Status  </th>
+                                            <th>    Edit    </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>aerysh.xyz</td>
-                                            <td>Other</td>
-                                            <td>69</td>
-                                            <td>60</td>
-                                            <td>Rp. 50000</td>
+                                            <td>    aerysh.xyz  </td>
+                                            <td>    Other       </td>
+                                            <td>    69          </td>
+                                            <td>    60          </td>
+                                            <td>    Rp. 50000   </td>
                                             <td>
                                                 <span class="badge bg-success">Diterima</span>
                                             </td>
@@ -79,11 +79,11 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>google.com</td>
-                                            <td>Other</td>
-                                            <td>68</td>
-                                            <td>92</td>
-                                            <td>Rp. 150000</td>
+                                            <td>    google.com  </td>
+                                            <td>    Other       </td>
+                                            <td>    68          </td>
+                                            <td>    92          </td>
+                                            <td>    Rp. 150000  </td>
                                             <td>
                                                 <span class="badge bg-success">Diterima</span>
                                             </td>
@@ -92,11 +92,11 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>facebook.com</td>
-                                            <td>Other</td>
-                                            <td>62</td>
-                                            <td>63</td>
-                                            <td>Rp. 100000</td>
+                                            <td>    facebook.com    </td>
+                                            <td>    Other           </td>
+                                            <td>    62              </td>
+                                            <td>    63              </td>
+                                            <td>    Rp. 100000      </td>
                                             <td>
                                                 <span class="badge bg-success">Diterima</span>
                                             </td>

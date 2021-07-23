@@ -77,6 +77,10 @@
 
                                             {{-- List --}}
                                             <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                                {{-- Admin Dashboard --}}
+                                                @can('isAdmin')
+                                                    <li><a class="dropdown-item" href="#">Admin</a></li>
+                                                @endcan
                                                 {{-- Buyer Dashboard --}}
                                                 <li><a class="dropdown-item" href="{{route('buyer.user_dashboard')}}">Beli</a></li>
                                                 {{-- Buyer Dashboard --}}

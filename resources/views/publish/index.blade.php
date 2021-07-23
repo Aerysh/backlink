@@ -7,7 +7,7 @@
         <div class="section container">
             <div class="col-md-12 row mb-3">
                 <div class="text-center">
-                    <h1>Anda Punya Website?</h1>
+                    <h1 class="display-5">Anda Punya Website?</h1>
                     <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper nibh eget viverra gravida.</p>
                 </div>
             </div>
@@ -29,14 +29,13 @@
                 </div>
             </div>
             <div class="col-md-12 text-center row mb-3">
-
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
                     @auth
-                        <a href="{{route('publish.user_dashboard')}}" class="btn btn-primary">Daftarkan Website</a>
+                        <a href="{{route('publish.user_dashboard')}}" class="btn btn-info text-white">Daftarkan Website</a>
                     @else
-                        <a href="{{route('login')}}" class="btn btn-primary">Daftarkan Website</a>
+                        <a href="{{route('login')}}" class="btn btn-info text-white">Daftarkan Website</a>
                     @endauth
                 </div>
                 <div class="col-md-4">
@@ -68,11 +67,9 @@
         <div class="section container">
         </div>
     </div>
-
 @endsection
 
 @section('css')
-
 @endsection
 
 @section('js')

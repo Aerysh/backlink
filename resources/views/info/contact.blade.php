@@ -44,7 +44,6 @@
                         </div>
                     </div>
                     <div class="col-md">
-
                     </div>
                 </div>
             </div>
