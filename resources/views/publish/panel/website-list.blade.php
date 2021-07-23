@@ -56,6 +56,7 @@
                                     <thead>
                                         <tr>
                                             <th>    Website </th>
+                                            <th>    Kategori    </th>
                                             <th>    DA      </th>
                                             <th>    PA      </th>
                                             <th>    Harga   </th>
@@ -68,6 +69,11 @@
                                         @foreach ($websites as $website)
                                             <tr>
                                                 <td>    {{  $website->url   }} </td>
+                                                <td>
+                                                    @foreach ($website->category as $category)
+                                                        {{$category->name}}
+                                                    @endforeach
+                                                </td>
                                                 <td>    {{  $website->domain_authority  }}    </td>
                                                 <td>    {{  $website->page_authoriry    }}  </td>
                                                 <td>    {{  $website->price }}  </td>

@@ -11,4 +11,8 @@ class Website extends Model
 
     protected $table = 'website';
 
+    public function category()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
