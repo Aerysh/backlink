@@ -21,9 +21,13 @@ Route::prefix('marketplace')->group(function () {
 Route::prefix('publish')->group(function () {
     Route::view('/', 'publish.index')->name('publish.index');
     Route::view('dashboard', 'publish.panel.dashboard')->name('publish.user_dashboard');
-    Route::view('website', 'publish.panel.website-list')->name('publish.user_website_list');
     Route::view('order', 'publish.panel.order-list')->name('publish.user_order_list');
-    Route::view('add-website', 'publish.panel.add-website')->name('publish.user_add_website');
+
+    // Website Route Group
+    Route::prefix('website')->group(function () {
+        Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('publish.user_website_list');
+        Route::get('/add-website', [App\Http\Controllers\WebsiteController::class, 'create'])->name('publish.user_add_website');
+    });
 });
 
 // Buyer Route Group

@@ -52,58 +52,32 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-responsive table-hover w-100">
+                                <table id="website_list" class="table table-responsive table-hover w-100 text-center">
                                     <thead>
                                         <tr>
                                             <th>    Website </th>
-                                            <th>    Kategori</th>
                                             <th>    DA      </th>
                                             <th>    PA      </th>
                                             <th>    Harga   </th>
                                             <th>    Status  </th>
+                                            <th>    Waktu Pengiriman    </th>
                                             <th>    Edit    </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>    aerysh.xyz  </td>
-                                            <td>    Other       </td>
-                                            <td>    69          </td>
-                                            <td>    60          </td>
-                                            <td>    Rp. 50000   </td>
-                                            <td>
-                                                <span class="badge bg-success">Diterima</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-outline-primary">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>    google.com  </td>
-                                            <td>    Other       </td>
-                                            <td>    68          </td>
-                                            <td>    92          </td>
-                                            <td>    Rp. 150000  </td>
-                                            <td>
-                                                <span class="badge bg-success">Diterima</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-outline-primary">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>    facebook.com    </td>
-                                            <td>    Other           </td>
-                                            <td>    62              </td>
-                                            <td>    63              </td>
-                                            <td>    Rp. 100000      </td>
-                                            <td>
-                                                <span class="badge bg-success">Diterima</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-outline-primary">Edit</a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($websites as $website)
+                                            <tr>
+                                                <td>    {{  $website->url   }} </td>
+                                                <td>    {{  $website->domain_authority  }}    </td>
+                                                <td>    {{  $website->page_authoriry    }}  </td>
+                                                <td>    {{  $website->price }}  </td>
+                                                <td>    {{  $website->status    }}  </td>
+                                                <td>    {{  $website->delivery_time }} Hari </td>
+                                                <td>
+                                                    <a href="/edit" class="btn btn-outline-primary">Edit</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -122,5 +96,11 @@
 
 {{-- Javascript --}}
 @section('js')
-
+    <script>
+        $(document).ready( function () {
+            $('#website_list').DataTable({
+                responsive: true,
+            });
+        });
+    </script>
 @endsection
