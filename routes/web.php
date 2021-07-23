@@ -26,7 +26,8 @@ Route::prefix('publish')->group(function () {
     // Website Route Group
     Route::prefix('website')->group(function () {
         Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('publish.user_website_list');
-        Route::get('/add-website', [App\Http\Controllers\WebsiteController::class, 'create'])->name('publish.user_add_website');
+        Route::get('add-website', [App\Http\Controllers\WebsiteController::class, 'create'])->name('publish.user_add_website');
+        Route::post('add-website', [App\Http\Controllers\WebsiteController::class, 'store'])->name('publish.user_store_website');
     });
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\Website;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
@@ -27,7 +28,8 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        return view('publish.panel.add-website');
+        $categories = Category::all();
+        return view('publish.panel.add-website', compact('categories'));
     }
 
     /**
@@ -38,7 +40,19 @@ class WebsiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                $website = new Website();
+        $website->users_id          = Auth::id();
+        $website->url               = $request->url;
+        $website->description       = $request->description;
+        $website->domain_authority  = $request->domain_authority;
+        $website->page_authority    = $request->page_authority;
+        $website->price             = $request->price;
+        $website->delivery_time     = $request->delivery_time;
+        $website->status            = 'Waiting';
+        $website->save();
+        $website->category()->sync([$request->category]);
+
+        return redirect()->route('publish.user_website_list')->with('add-website-success', 'Pendaftaran Website Berhasil !, Silahkan Tunggu Aprroval Admin');
     }
 
     /**

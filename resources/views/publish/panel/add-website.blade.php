@@ -36,38 +36,53 @@
 {{-- Konten Utama --}}
 @section('panelContent')
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title lead">Tambah Website</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('publish.user_store_website')}}">
+                        {{ csrf_field() }}
                         <div class="form-group mb-3">
-                            <label for="domainName">Nama Domain</label>
-                            <input type="text" id="domainName" name="domainName" class="form-control" required placeholder="Nama Domain">
+                            <label for="url">Nama Domain</label>
+                            <input type="url" id="url" name="url" class="form-control" required placeholder="Nama Domain">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="websiteDescription">Deskripsi Website</label>
-                            <textarea id="websiteDescription" name="websiteDescription" class="form-control" rows="5"></textarea>
+                            <label for="description">Deskripsi Website</label>
+                            <textarea id="description" name="description" class="form-control" rows="5"></textarea>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="websiteCategories">Kategori</label>
-                            <select class="form-select" id="websiteCategories" name="websiteCategories" required>
+                            <label for="category">Kategori Website</label>
+                            <select class="form-select" id="category" name="category" required>
                                 <option value="" selected disabled hidden>Pilih Kategori</option>
-                                <option value="Otomotif">Otomotif</option>
-                                <option value="Teknologi">Teknologi</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="domainAuthority">Domain Authority</label>
-                            <input type="number" min="0" max="100" id="domainAuthority" name="domainAuthority" class="form-control" required placeholder="Domain Authority">
+                            <label for="domain_authority">Domain Authority</label>
+                            <input type="number" min="0" max="100" id="domain_authority" name="domain_authority" class="form-control" required placeholder="Domain Authority">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="pageAuthority">Page Authority</label>
-                            <input type="number" min="0" max="100" id="pageAuthority" name="pageAuthority" class="form-control" required placeholder="Page Authority">
+                            <label for="page_authority">Page Authority</label>
+                            <input type="number" min="0" max="100" id="page_authority" name="page_authority" class="form-control" required placeholder="Page Authority">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price">Harga</label>
+                            <input type="number" id="price" name="price" class="form-control" required placeholder="Harga">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="delivery_time">Estimasi Waktu Pengiriman</label>
+                            <select class="form-select" id="delivery_time" name="delivery_time" required>
+                                <option value="" selected disabled hidden>Estimasi Waktu Pengiriman</option>
+                                <option value="3">3 Hari</option>
+                                <option value="7">7 Hari</option>
+                                <option value="14">14 Hari</option>
+                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-success"><i class="fa fa-plus fa-sm"></i> Submit</button>
@@ -77,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md">
         </div>
     </div>
 @endsection

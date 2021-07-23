@@ -37,6 +37,15 @@
 @section('panelContent')
     <div class="row">
         <div class="col-md-12">
+            @if (Session::has('add-website-success'))
+                <div class="alert alert-success" role="alert">
+                    {{  Session::get('add-website-success') }}
+                </div>
+            @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header container-fluid">
                     <div class="row">
@@ -77,7 +86,15 @@
                                                 <td>    {{  $website->domain_authority  }}    </td>
                                                 <td>    {{  $website->page_authoriry    }}  </td>
                                                 <td>    {{  $website->price }}  </td>
-                                                <td>    {{  $website->status    }}  </td>
+                                                <td>
+                                                    @if ($website->status == 'Approved')
+                                                        <span class="badge bg-success">{{  $website->status    }}</span>
+                                                    @elseif($website->status == 'Declined')
+                                                        <span class="badge bg-danger">{{  $website->status    }}</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">{{  $website->status    }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>    {{  $website->delivery_time }} Hari </td>
                                                 <td>
                                                     <a href="/edit" class="btn btn-outline-primary">Edit</a>
