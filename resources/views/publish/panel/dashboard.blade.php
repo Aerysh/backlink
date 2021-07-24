@@ -12,7 +12,7 @@
 {{-- Konten Sidebar --}}
 @section('sidebar')
     <li>
-        <p class="lead">Saldo : Rp. 0</p>
+        <p class="lead">Saldo : Rp. {{  Auth::user()->balance   }}</p>
     </li>
     <hr>
     <li>
@@ -54,7 +54,7 @@
                     <h5 class="card-title lead">Order Aktif</h5>
                 </div>
                 <div class="card-body">
-                    <h1 class="text-muted text-center">3</h1>
+                    <h1 class="text-muted text-center">{{   $orderCount }}</h1>
                     <h5 class="text-center text-muted">Order</h5>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     <h5 class="card-title lead">Jumlah Website</h5>
                 </div>
                 <div class="card-body">
-                    <h1 class="text-muted text-center">3</h1>
+                    <h1 class="text-muted text-center">{{   $websiteCount   }}</h1>
                     <h5 class="text-center text-muted">Website</h5>
                 </div>
             </div>
@@ -75,13 +75,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title lead">Order</h5>
+                    <h5 class="card-title lead">Order Masuk</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover text-center w-100">
                             <thead>
                                 <tr>
+                                    <th>    Order   </th>
                                     <th>    Website </th>
                                     <th>    Harga   </th>
                                     <th>    Tanggal </th>
@@ -89,34 +90,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>    aerysh.xyz  </td>
-                                    <td>    Rp. 50000   </td>
-                                    <td>    19 Jul 2021 </td>
-                                    <td>
-                                        <span class="badge bg-secondary">Belum Selesai</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>    google.com  </td>
-                                    <td>    Rp. 150000  </td>
-                                    <td>    15 Jul 2021 </td>
-                                    <td>
-                                        <span class="badge bg-secondary">Belum Selesai</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>    facebook.com    </td>
-                                    <td>    Rp. 100000      </td>
-                                    <td>    13 Jul 2021     </td>
-                                    <td>
-                                        <span class="badge bg-success">Selesai</span>
-                                    </td>
-                                </tr>
+                                @foreach ($websites as $website)
+                                    <tr>
+                                        <td>
+                                            @foreach ($website->order as $order)
+                                                {{  $order->order_number    }}
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <a href="{{  $website->url   }}" target="_blank">{{  $website->url   }}</a>
+                                        </td>
+                                        <td>    {{  $order->price }}    </td>
+                                        <td>    {{  date('d-M-Y h:m:s', strtotime($order->created_at))  }}    </td>
+                                        <td>    {{  $order->order_status    }}  </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <div class="text-end">
-                            <a href="#" class="btn btn-outline-primary">Lihat Semua</a>
+                            <a href="{{route('publish.user_order_list')}}" class="btn btn-outline-primary">Lihat Semua</a>
                         </div>
                     </div>
                 </div>

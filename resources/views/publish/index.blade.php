@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-4">
                     @auth
-                        <a href="{{route('publish.user_dashboard')}}" class="btn btn-info text-white">Daftarkan Website</a>
+                        <a href="{{route('publish.user_add_website')}}" class="btn btn-info text-white">Daftarkan Website</a>
                     @else
                         <a href="{{route('login')}}" class="btn btn-info text-white">Daftarkan Website</a>
                     @endauth

@@ -12,7 +12,7 @@
 {{-- Konten Sidebar --}}
 @section('sidebar')
     <li>
-        <p class="lead">Saldo : Rp. 0</p>
+        <p class="lead">Saldo : Rp. {{  Auth::user()->balance   }}</p>
     </li>
     <hr>
     <li>

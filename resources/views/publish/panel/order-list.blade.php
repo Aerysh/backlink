@@ -12,7 +12,7 @@
 {{-- Konten Sidebar --}}
 @section('sidebar')
     <li>
-        <p class="lead">Saldo : Rp. 0</p>
+        <p class="lead">Saldo : Rp. {{  Auth::user()->balance   }}</p>
     </li>
     <hr>
     <li>
@@ -51,46 +51,28 @@
                                     <th>    Harga   </th>
                                     <th>    Tanggal </th>
                                     <th>    Status  </th>
-                                    <th>    Detail  </th>
+                                    <th>    Edit  </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>    UV68EQVW    </td>
-                                    <td>    aerysh.xyz  </td>
-                                    <td>    Rp. 50000   </td>
-                                    <td>    19 Jul 2021 </td>
-                                    <td>
-                                        <span class="badge bg-secondary">Belum Selesai</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-outline-primary">Detail</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>    3MFDZBBR    </td>
-                                    <td>    google.com  </td>
-                                    <td>    Rp. 150000  </td>
-                                    <td>    15 Jul 2021 </td>
-                                    <td>
-                                        <span class="badge bg-secondary">Belum Selesai</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-outline-primary">Detail</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>    Y0DNXTFN        </td>
-                                    <td>    facebook.com    </td>
-                                    <td>    Rp. 100000      </td>
-                                    <td>    13 Jul 2021     </td>
-                                    <td>
-                                        <span class="badge bg-success">Selesai</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-outline-primary">Detail</a>
-                                    </td>
-                                </tr>
+                                @foreach ($websites as $website)
+                                    <tr>
+                                        <td>
+                                            @foreach ($website->order as $order)
+                                                {{  $order->order_number    }}
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <a href="{{  $website->url   }}" target="_blank">{{  $website->url   }}</a>
+                                        </td>
+                                        <td>    {{  $order->price }}    </td>
+                                        <td>    {{  date('d-M-Y h:m:s', strtotime($order->created_at))  }}    </td>
+                                        <td>    {{  $order->order_status    }}  </td>
+                                        <td>
+                                            <a href="#" class="btn btn-outline-primary">Edit</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

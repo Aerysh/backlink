@@ -20,13 +20,21 @@ Route::prefix('marketplace')->group(function () {
 // Publisher Route Group
 Route::prefix('publish')->group(function () {
     Route::view('/', 'publish.index')->name('publish.index');
-    Route::view('dashboard', 'publish.panel.dashboard')->name('publish.user_dashboard');
-    Route::view('order', 'publish.panel.order-list')->name('publish.user_order_list');
+    Route::get('dashboard', [App\Http\Controllers\PublishController::class, 'index'])->name('publish.user_dashboard');
+
+    // Publisher Incoming Order Route Group
+    Route::prefix('order')->group(function () {
+        // Show Publisher's Incoming Order Page
+        Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('publish.user_order_list');
+    });
 
     // Website Route Group
     Route::prefix('website')->group(function () {
+        // Show Publisher's Website List Page
         Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('publish.user_website_list');
+        // Show Publisher's Add Website Page
         Route::get('add-website', [App\Http\Controllers\WebsiteController::class, 'create'])->name('publish.user_add_website');
+        // Publisher's Store Website
         Route::post('add-website', [App\Http\Controllers\WebsiteController::class, 'store'])->name('publish.user_store_website');
     });
 });

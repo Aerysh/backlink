@@ -98,7 +98,7 @@
                                                 {{-- User Profile --}}
 
                                                 {{-- User Balance --}}
-                                                <li><a class="dropdown-item" href="#">Saldo : 0</a></li>
+                                                <li><div class="dropdown-item">Saldo : {{    Auth::user()->balance   }}</div></li>
                                                 {{-- User Balance --}}
 
                                                 {{-- Logout --}}

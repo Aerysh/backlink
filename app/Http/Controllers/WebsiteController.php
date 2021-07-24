@@ -40,7 +40,7 @@ class WebsiteController extends Controller
      */
     public function store(Request $request)
     {
-                $website = new Website();
+        $website = new Website();
         $website->users_id          = Auth::id();
         $website->url               = $request->url;
         $website->description       = $request->description;
