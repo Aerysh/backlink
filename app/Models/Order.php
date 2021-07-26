@@ -23,6 +23,12 @@ class Order extends Model
                     ->get();
     }
 
+    public function getOrderDetails($orderNumber)
+    {
+        return $this->where('order_number', $orderNumber)
+                    ->get();
+    }
+
     public function getOrderCount()
     {
         return $this->where('users_id', Auth::id())

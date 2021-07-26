@@ -84,7 +84,7 @@
                                                     @endforeach
                                                 </td>
                                                 <td>    {{  $website->domain_authority  }}    </td>
-                                                <td>    {{  $website->page_authoriry    }}  </td>
+                                                <td>    {{  $website->page_authority    }}  </td>
                                                 <td>    {{  $website->price }}  </td>
                                                 <td>
                                                     @if ($website->status == 'Approved')

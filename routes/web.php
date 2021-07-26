@@ -26,6 +26,7 @@ Route::prefix('publish')->group(function () {
     Route::prefix('order')->group(function () {
         // Show Publisher's Incoming Order Page
         Route::get('/', [App\Http\Controllers\PublishController::class, 'orderList'])->name('publish.user_order_list');
+
     });
 
     // Website Route Group
@@ -52,3 +53,5 @@ Route::prefix('buyer')->group(function () {
 Route::prefix('info')->group(function () {
     Route::view('contact', 'info.contact')->name('info.contact');
 });
+
+Route::get('details', [App\Http\Controllers\OrderController::class, 'viewDetails'])->name('view_order_details');
