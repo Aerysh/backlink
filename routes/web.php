@@ -54,4 +54,5 @@ Route::prefix('info')->group(function () {
     Route::view('contact', 'info.contact')->name('info.contact');
 });
 
-Route::get('details', [App\Http\Controllers\OrderController::class, 'viewDetails'])->name('view_order_details');
+Route::get('orderDetails', [App\Http\Controllers\OrderController::class, 'viewDetails'])->name('view_order_details'); // Sementara
+Route::view('websiteDetails', 'info.website-details'); // Sementara
