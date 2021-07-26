@@ -34,4 +34,11 @@ class OrderController extends Controller
 
         return view('buyer.order', compact('orders'));
     }
+
+    public function viewDetails()
+    {
+        // $details = $this->orderModel->getOrderDetails($orderNumber);
+
+        return view('order.details');
+    }
 }
