@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Models\Website;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Requests\WebsiteRequest;
 
-class WebsiteController extends Controller
+class MarketplaceController extends Controller
 {
+    protected $websiteModel;
+
+    public function __construct()
+    {
+        $this->websiteModel = new Website();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +21,15 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-        $websites = Website::where('users_id', Auth::id())->get();
+        // Top Selling
 
-        return view('publish.panel.website-list', compact('websites'));
+        // Newest
+        $latest = $this->websiteModel->getLatest();
+
+        // Cheapest
+        $cheapest = $this->websiteModel->getCheapest();
+
+        return view('marketplace.index', compact('latest', 'cheapest'));
     }
 
     /**
@@ -29,8 +39,7 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('publish.panel.add-website', compact('categories'));
+        //
     }
 
     /**
@@ -39,24 +48,9 @@ class WebsiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WebsiteRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-
-
-        $website = new Website();
-        $website->users_id          = Auth::id();
-        $website->url               = $request->url;
-        $website->description       = $request->description;
-        $website->domain_authority  = $request->domain_authority;
-        $website->page_authority    = $request->page_authority;
-        $website->price             = $request->price;
-        $website->delivery_time     = $request->delivery_time;
-        $website->status            = 'Waiting';
-        $website->save();
-        $website->category()->attach($request->categories_id);
-
-        return redirect()->route('publish.user_website_list')->with('add-website-success', 'Pendaftaran Website Berhasil !, Silahkan Tunggu Aprroval Admin');
+        //
     }
 
     /**

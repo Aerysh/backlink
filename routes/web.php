@@ -12,7 +12,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Marketplace Route
 Route::prefix('marketplace')->group(function () {
-    Route::view('/', 'marketplace.index')->name('marketplace.index');
+    Route::get('/', [App\Http\Controllers\MarketplaceController::class, 'index'])->name('marketplace.index');
     Route::view('cart', 'marketplace.cart')->name('marketplace.cart');
     Route::view('cari', 'marketplace.search-result')->name('marketplace.search_result');
 });
@@ -20,12 +20,12 @@ Route::prefix('marketplace')->group(function () {
 // Publisher Route Group
 Route::prefix('publish')->group(function () {
     Route::view('/', 'publish.index')->name('publish.index');
-    Route::get('dashboard', [App\Http\Controllers\PublishController::class, 'index'])->name('publish.user_dashboard');
+    Route::get('dashboard', [App\Http\Controllers\PublishController::class, 'dashboard'])->name('publish.user_dashboard');
 
     // Publisher Incoming Order Route Group
     Route::prefix('order')->group(function () {
         // Show Publisher's Incoming Order Page
-        Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('publish.user_order_list');
+        Route::get('/', [App\Http\Controllers\PublishController::class, 'orderList'])->name('publish.user_order_list');
     });
 
     // Website Route Group
@@ -41,8 +41,12 @@ Route::prefix('publish')->group(function () {
 
 // Buyer Route Group
 Route::prefix('buyer')->group(function () {
-    Route::view('/dashboard', 'buyer.dashboard')->name('buyer.user_dashboard');
-    Route::view('/order', 'buyer.order')->name('buyer.user_order');
+    Route::get('/dashboard', [App\Http\Controllers\BuyerController::class, 'dashboard'])->name('buyer.user_dashboard');
+
+    // Buyer Order Route Group
+    Route::prefix('order')->group(function () {
+        Route::get('/', [App\Http\Controllers\BuyerController::class, 'orderList'])->name('buyer.user_order_list');
+    });
 });
 
 Route::prefix('info')->group(function () {

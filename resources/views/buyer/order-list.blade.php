@@ -21,7 +21,7 @@
         </a>
     </li>
     <li>
-        <a href="{{route('buyer.user_order')}}" class="nav-link text-white active">
+        <a href="{{route('buyer.user_order_list')}}" class="nav-link text-white active">
             Order
         </a>
     </li>
@@ -36,8 +36,8 @@
                     <h5 class="card-title lead">Order</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive text-center">
-                        <table class="table table-hover w-100">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center w-100" id="orderList">
                             <thead>
                                 <tr>
                                     <th>    Order   </th>
@@ -49,18 +49,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>    Y0DNXTFN    </td>
-                                    <td>    facebook.com</td>
-                                    <td>    Rp. 100000  </td>
-                                    <td>    13 Jul 2021 </td>
-                                    <td>
-                                        <span class="badge bg-success">Selesai</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-outline-primary">Detail</a>
-                                    </td>
-                                </tr>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td>    {{  $order->order_number    }}  </td>
+                                        <td>
+                                            @foreach ($order->website as $website)
+                                                {{  $website->url   }}
+                                            @endforeach
+                                        </td>
+                                        <td>    {{  $order->price   }}  </td>
+                                        <td>    {{  date('d-M-y h:m:s', strtotime($order->created_at))  }}  </td>
+                                        <td>    {{  $order->order_status    }}  </td>
+                                        <td>    </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -77,5 +79,11 @@
 
 {{-- JS --}}
 @section('js')
-
+<script>
+    $(document).ready( function () {
+        $('#orderList').DataTable({
+            responsive: true,
+        });
+    });
+</script>
 @endsection

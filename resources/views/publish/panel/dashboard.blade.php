@@ -42,9 +42,8 @@
                     <h5 class="card-title lead">Total Penghasilan</h5>
                 </div>
                 <div class="card-body">
-                    <div>
-                        <canvas id="earningChart" height="250"></canvas>
-                    </div>
+                    <h1 class="text-muted text-center">Rp. {{   $income }}</h1>
+                    <h5 class="text-center text-muted">Total</h5>
                 </div>
             </div>
         </div>
@@ -79,7 +78,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover text-center w-100">
+                        <table class="table table-hover text-center w-100" id="orderList">
                             <thead>
                                 <tr>
                                     <th>    Order   </th>
@@ -124,36 +123,11 @@
 
 {{-- Javascript --}}
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js" integrity="sha512-5vwN8yor2fFT9pgPS9p9R7AszYaNn0LkQElTXIsZFCL7ucT8zDCAqlQXDdaqgA1mZP47hdvztBMsIoFxq/FyyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Penghasilan',
-                data: [150000, 50000, 200000, 250000, 300000, 100000, 50000],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
-        };
-        const config = {
-            type: 'line',
-            data: data,
-        };
-
-
-
-        var myChart = new Chart(
-            document.getElementById('earningChart'),
-            config
-        );
+        $(document).ready( function () {
+            $('#orderList').DataTable({
+                responsive: true,
+            });
+        });
     </script>
 @endsection

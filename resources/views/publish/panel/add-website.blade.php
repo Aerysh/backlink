@@ -39,6 +39,15 @@
         <div class="col-md">
         </div>
         <div class="col-md-10">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title lead">Tambah Website</h5>
@@ -56,7 +65,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="category">Kategori Website</label>
-                            <select class="form-select" id="category" name="category" required>
+                            <select class="form-select" id="categories_id" name="categories_id[]" required multiple>
                                 <option value="" selected disabled hidden>Pilih Kategori</option>
                                 @foreach ($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
