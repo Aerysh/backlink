@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Kirschbaum\PowerJoins\PowerJoins;
 
 class Website extends Model
 {
     use HasFactory;
+    use PowerJoins;
 
     protected $table = 'website';
 
@@ -26,6 +28,13 @@ class Website extends Model
     public function getWebsiteList()
     {
         return $this->where('users_id', Auth::id())
+                    ->get();
+    }
+
+    // This Function Return Website By ID
+    public function getWebsiteById($id)
+    {
+        return $this->where('id', $id)
                     ->get();
     }
 
@@ -89,6 +98,21 @@ class Website extends Model
     {
         return $this->orderBy('price', 'asc')
                     ->get();
+    }
+
+    // This Function Return If a Website Have Order Or Not
+    public function checkWebsiteOrder($id)
+    {
+        $website = $this->where('website.id', $id)
+                        ->joinRelationship('order')
+                        ->where('order.status', '=', 'Sedang Dikerjakan')
+                        ->get();
+
+        if($website->first()){
+            return True;
+        }
+
+        return false;
     }
 
 }

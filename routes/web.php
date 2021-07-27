@@ -37,6 +37,10 @@ Route::prefix('publish')->group(function () {
         Route::get('add-website', [App\Http\Controllers\WebsiteController::class, 'create'])->name('publish.user_add_website');
         // Publisher's Store Website
         Route::post('add-website', [App\Http\Controllers\WebsiteController::class, 'store'])->name('publish.user_store_website');
+        // Publisher's Edit Website
+        // Edit Website Under Construction Due To Other User Can Edit Website That Don't Belong To Them
+        Route::get('edit/{id}', [App\Http\Controllers\WebsiteController::class, 'edit'])->name('publish.user_edit_website');
+
     });
 });
 
@@ -54,5 +58,5 @@ Route::prefix('info')->group(function () {
     Route::view('contact', 'info.contact')->name('info.contact');
 });
 
-Route::get('orderDetails', [App\Http\Controllers\OrderController::class, 'viewDetails'])->name('view_order_details'); // Sementara
 Route::view('websiteDetails', 'info.website-details'); // Sementara
+

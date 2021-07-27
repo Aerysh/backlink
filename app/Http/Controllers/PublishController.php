@@ -33,7 +33,7 @@ class PublishController extends Controller
         // Get Website Count
         $websiteCount = $this->websiteModel->getWebsiteCount();
 
-        return view('publish.panel.dashboard', compact('income', 'websites', 'orderCount', 'websiteCount'));
+        return view('publish.dashboard', compact('income', 'websites', 'orderCount', 'websiteCount'));
 
         // echo $websites;
     }
@@ -43,6 +43,6 @@ class PublishController extends Controller
         // Get Order list
         $websites = $this->websiteModel->getOrderList();
 
-        return view('publish.panel.order-list', compact('websites'));
+        return view('publish.order.order-list', compact('websites'));
     }
 }

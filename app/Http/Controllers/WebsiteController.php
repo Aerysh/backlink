@@ -10,6 +10,14 @@ use App\Http\Requests\WebsiteRequest;
 
 class WebsiteController extends Controller
 {
+    protected $websiteModel;
+
+    public function __construct()
+    {
+        $this->websiteModel = new Website();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +25,9 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-        $websites = Website::where('users_id', Auth::id())->get();
+        $websites = $this->websiteModel->getWebsiteList();
 
-        return view('publish.panel.website-list', compact('websites'));
+        return view('publish.website.website-list', compact('websites'));
     }
 
     /**
@@ -30,7 +38,7 @@ class WebsiteController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('publish.panel.add-website', compact('categories'));
+        return view('publish.website.add-website', compact('categories'));
     }
 
     /**
@@ -76,9 +84,13 @@ class WebsiteController extends Controller
      * @param  \App\Models\Website  $website
      * @return \Illuminate\Http\Response
      */
-    public function edit(Website $website)
+    public function edit($id)
     {
-        //
+        $websites = $this->websiteModel->getWebsiteById($id);
+        $categories = Category::all();
+
+        return view('publish.website.edit-website', compact('websites', 'categories'));
+
     }
 
     /**
@@ -88,9 +100,14 @@ class WebsiteController extends Controller
      * @param  \App\Models\Website  $website
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Website $website)
+    public function update(Request $request)
     {
-        //
+        if($this->websiteModel->checkWebsiteOrder($request->id))
+        {
+            return back()->with('order-exist', 'Maaf Anda Sedang Memiliki Pesanan, Silahkan Diselesaikan Terlebih Dahulu');
+        }else{
+
+        }
     }
 
     /**

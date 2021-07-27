@@ -64,6 +64,7 @@
                                 <table id="website_list" class="table table-responsive table-hover w-100 text-center">
                                     <thead>
                                         <tr>
+                                            <th hidden>#</th>
                                             <th>    Website </th>
                                             <th>    Kategori    </th>
                                             <th>    DA      </th>
@@ -77,6 +78,7 @@
                                     <tbody>
                                         @foreach ($websites as $website)
                                             <tr>
+                                                <td hidden>    {{  $website->id    }}  </td>
                                                 <td>    {{  $website->url   }} </td>
                                                 <td>
                                                     @foreach ($website->category as $category)
@@ -97,7 +99,7 @@
                                                 </td>
                                                 <td>    {{  $website->delivery_time }} Hari </td>
                                                 <td>
-                                                    <a href="/edit" class="btn btn-outline-primary">Edit</a>
+                                                    <a href="{{route('publish.user_edit_website', ['id' => $website->id])}}" class="btn btn-outline-primary">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach

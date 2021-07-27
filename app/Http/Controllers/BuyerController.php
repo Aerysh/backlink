@@ -38,6 +38,6 @@ class BuyerController extends Controller
     {
         $orders = $this->orderModel->getOrderList();
 
-        return view('buyer.order-list', compact('orders'));
+        return view('buyer.order.order-list', compact('orders'));
     }
 }
