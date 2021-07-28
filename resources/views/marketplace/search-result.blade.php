@@ -12,31 +12,28 @@
                             <h5 class="card-title">
                                 <h5 class="card-title">Filter</h5>
                                 <hr/>
-                                <form method="POST" action="">
-                                    <div class="form-group mb-3">
-                                        <label for="domainName">Domain</label>
-                                        <input type="text" id="domainName" class="form-control" name="domainName" placeholder="example.com">
-                                    </div>
+                                <form method="GET" action="{{route('marketplace.search_result')}}">
                                     <div class="form-group mb-3">
                                         <label for="categories">Kategori</label>
                                         <select id="categories" class="form-select" name="categories">
-                                            <option value="" selected hidden>Semua Kategori</option>
-                                            <option value="">Otomotif</option>
-                                            <option value="">Bisnis</option>
+                                            <option value="all" selected>Semua Kategori</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="DARange">Domain Authority</label>
-                                        <input type="range" class="form-range" value="10" min="0" max="100" id="DARange" name="DARange" oninput="this.nextElementSibling.value = this.value">
+                                        <label for="domain_authority">Domain Authority</label>
+                                        <input type="range" class="form-range" value="10" min="0" max="100" id="domain_authority" name="domain_authority" oninput="this.nextElementSibling.value = this.value">
                                         <output>10</output>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="PARange">Page Authority</label>
-                                        <input type="range" class="form-range" value="10" min="0" max="100" id="PARange" name="PARange" oninput="this.nextElementSibling.value = this.value">
+                                        <label for="page_authority">Page Authority</label>
+                                        <input type="range" class="form-range" value="10" min="0" max="100" id="page_authority" name="page_authority" oninput="this.nextElementSibling.value = this.value">
                                         <output>10</output>
                                     </div>
                                     <div class="form-group mb-3 text-end">
-                                        <button type="button" class="btn btn-outline-success"><i class="fas fa-search"></i> Cari</button>
+                                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-search"></i> Cari</button>
                                     </div>
                                 </form>
                             </h5>
@@ -47,10 +44,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-stripped table-hover text-center w-100">
+                                <table class="table table-stripped table-hover text-center w-100" id="websiteList">
                                     <thead>
                                         <tr>
                                             <th>Website</th>
+                                            <th>Kategori</th>
                                             <th>DA</th>
                                             <th>PA</th>
                                             <th>Harga</th>
@@ -58,30 +56,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td hidden>1</td>
-                                            <td><a class="text-dark" href="#">aerysh.xyz</a></td>
-                                            <td>69</td>
-                                            <td>60</td>
-                                            <td>Rp. 50000</td>
-                                            <td><a class="btn btn-outline-success" href="{{route('marketplace.cart')}}">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
-                                        </tr>
-                                        <tr>
-                                            <td hidden>2</td>
-                                            <td><a class="text-dark" href="#">google.com</a></td>
-                                            <td>68</td>
-                                            <td>92</td>
-                                            <td>Rp. 150000</td>
-                                            <td><a class="btn btn-outline-success" href="#">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
-                                        </tr>
-                                        <tr>
-                                            <td hidden>3</td>
-                                            <td><a class="text-dark" href="#">facebook.com</a></td>
-                                            <td>62</td>
-                                            <td>63</td>
-                                            <td>Rp. 100000</td>
-                                            <td><a class="btn btn-outline-success" href="#">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
-                                        </tr>
+                                        @foreach ($results as $result)
+                                            <tr>
+                                                <td>
+                                                    <a class="text-dark" href="#">
+                                                        {{ $result->url }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @foreach ($result->category as $category)
+                                                        {{$category->name}}<br>
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ $result->domain_authority }}</td>
+                                                <td>{{ $result->page_authority }}</td>
+                                                <td>Rp. {{ $result->price }}</td>
+                                                <td><a class="btn btn-outline-success" href="{{route('marketplace.cart')}}">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -98,5 +90,13 @@
 @endsection
 
 @section('js')
-
+<script>
+    $(document).ready( function () {
+        $('#websiteList').DataTable({
+            responsive: true,
+            searching: false,
+            "ordering": false,
+        });
+    });
+</script>
 @endsection

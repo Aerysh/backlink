@@ -115,4 +115,27 @@ class Website extends Model
         return false;
     }
 
+    // This function return website that match search criteria
+    public function search($category, $da, $pa)
+    {
+        if($category == 'all')
+        {
+            return $this->where('domain_authority', '>=', (int) $da)
+                    ->where('page_authority', '>=', (int) $pa)
+                    ->orderBy('domain_authority', 'asc')
+                    ->orderBy('page_authority', 'asc')
+                    ->get();
+        }else{
+            return $this->where('domain_authority', '>=', (int) $da)
+                        ->where('page_authority', '>=', (int) $pa)
+                        ->joinRelationship('category')
+                        ->where('categories.id', $category)
+                        ->orderBy('domain_authority', 'asc')
+                        ->orderBy('page_authority', 'asc')
+                        ->get();
+        }
+
+
+    }
+
 }
