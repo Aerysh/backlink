@@ -94,7 +94,7 @@
                                                 <hr>
 
                                                 {{-- User Profile --}}
-                                                <li><a class="dropdown-item" href="#">Profil</a></li>
+                                                <li><a class="dropdown-item" href="{{route('profile.index')}}">Profil</a></li>
                                                 {{-- User Profile --}}
 
                                                 {{-- User Balance --}}
