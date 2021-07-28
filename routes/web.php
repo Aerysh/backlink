@@ -10,6 +10,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// User Profile Route
+Route::prefix('profile')->group(function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+});
+
 // Marketplace Route
 Route::prefix('marketplace')->group(function () {
     Route::get('/', [App\Http\Controllers\MarketplaceController::class, 'index'])->name('marketplace.index');
