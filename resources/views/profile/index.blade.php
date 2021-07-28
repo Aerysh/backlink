@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 {{-- Judul Halaman --}}
-@section('title', 'Insert Title')
+@section('title', 'User Profile')
 
 {{-- Konten --}}
 @section('content')
