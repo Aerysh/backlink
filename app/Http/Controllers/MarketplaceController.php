@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Website;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class MarketplaceController extends Controller
 {
@@ -29,7 +30,20 @@ class MarketplaceController extends Controller
         // Cheapest
         $cheapest = $this->websiteModel->getCheapest();
 
-        return view('marketplace.index', compact('latest', 'cheapest'));
+        // Category
+        $categories = Category::all();
+
+        return view('marketplace.index', compact('latest', 'cheapest', 'categories'));
+    }
+
+    // Return search result
+    public function search(Request $request)
+    {
+        $categories = Category::all();
+
+        $results = $this->websiteModel->search($request->categories, $request->domain_authority, $request->page_authority);
+
+        return view('marketplace.search-result', compact('categories', 'results'));
     }
 
     /**

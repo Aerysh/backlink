@@ -51,28 +51,29 @@
 
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Cari</h5>
-                <form action="" method="">
+                <form action="{{route('marketplace.search_result')}}" method="GET">
+                    {{-- {{ csrf_field() }} --}}
                     <div class="form-group mb-3">
                         <label for="categories">Kategori</label>
-                        <select class="form-select" id="selectKategori" required>
-                            <option value="" selected hidden>Pilih Kategori...</option>
-                            <option>Bisnis</option>
-                            <option>Teknologi</option>
+                        <select class="form-select" id="categories" name="categories" required>
+                            <option value="all" selected>Semua Kategori</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="DARange">Domain Authority</label>
-                        <input type="range" class="form-range" value="10" min="0" max="100" id="DARange" name="DARange" oninput="this.nextElementSibling.value = this.value">
+                        <label for="domain_authority">Domain Authority</label>
+                        <input type="range" class="form-range" value="10" min="0" max="100" id="domain_authority" name="domain_authority" oninput="this.nextElementSibling.value = this.value">
                         <output>10</output>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="PARange">Page Authority</label>
-                        <input type="range" class="form-range" value="10" min="0" max="100" id="PARange" name="PARange" oninput="this.nextElementSibling.value = this.value">
+                        <label for="page_authority">Page Authority</label>
+                        <input type="range" class="form-range" value="10" min="0" max="100" id="page_authority" name="page_authority" oninput="this.nextElementSibling.value = this.value">
                         <output>10</output>
                     </div>
                     <div class="form-group mb-3 text-end">
-                        {{-- <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i> Cari</button> --}}
-                        <a href="{{route('marketplace.search_result')}}" class="btn btn-outline-primary"><i class="fas fa-search"></i> Cari</a>
+                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i> Cari</button>
                     </div>
                 </form>
             </div>

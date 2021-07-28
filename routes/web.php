@@ -14,7 +14,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('marketplace')->group(function () {
     Route::get('/', [App\Http\Controllers\MarketplaceController::class, 'index'])->name('marketplace.index');
     Route::view('cart', 'marketplace.cart')->name('marketplace.cart');
-    Route::view('cari', 'marketplace.search-result')->name('marketplace.search_result');
+    Route::get('cari', [App\Http\Controllers\MarketplaceController::class, 'search'])->name('marketplace.search_result');
 });
 
 // Publisher Route Group
@@ -59,4 +59,3 @@ Route::prefix('info')->group(function () {
 });
 
 Route::view('websiteDetails', 'info.website-details'); // Sementara
-
