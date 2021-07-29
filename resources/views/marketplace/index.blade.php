@@ -52,7 +52,6 @@
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Cari</h5>
                 <form action="{{route('marketplace.search_result')}}" method="GET">
-                    {{-- {{ csrf_field() }} --}}
                     <div class="form-group mb-3">
                         <label for="categories">Kategori</label>
                         <select class="form-select" id="categories" name="categories" required>
