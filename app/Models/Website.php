@@ -28,6 +28,7 @@ class Website extends Model
     public function getWebsiteList()
     {
         return $this->where('users_id', Auth::id())
+                    ->where('status', )
                     ->get();
     }
 
@@ -89,14 +90,16 @@ class Website extends Model
     // This Function Get Newest Item
     public function getLatest()
     {
-        return $this->latest()
+        return $this->where('status', 'Approved')
+                    ->latest()
                     ->get();
     }
 
     // This Function Get Cheapest Item
     public function getCheapest()
     {
-        return $this->orderBy('price', 'asc')
+        return $this->where('status', 'Approved')
+                    ->orderBy('price', 'asc')
                     ->get();
     }
 
