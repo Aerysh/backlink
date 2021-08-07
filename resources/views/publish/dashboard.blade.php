@@ -86,6 +86,7 @@
                                     <th>    Harga   </th>
                                     <th>    Tanggal </th>
                                     <th>    Status  </th>
+                                    <th>    Edit  </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,19 +97,24 @@
                                                 {{  $order->order_number    }}
                                             @endforeach
                                         </td>
-                                        <td>
-                                            <a href="{{  $website->url   }}" target="_blank">{{  $website->url   }}</a>
-                                        </td>
+                                        <td>    {{  $website->url   }}  </td>
                                         <td>    {{  $order->price }}    </td>
                                         <td>    {{  date('d-M-Y h:m:s', strtotime($order->created_at))  }}    </td>
-                                        <td>    {{  $order->order_status    }}  </td>
+                                        {{-- <td>    {!! $order->order_status    !!}  </td> --}}
+                                        <td>
+                                            <div class="badge bg-info">{{  $order->order_status    }}</div>
+                                        </td>
+                                        <td>
+                                            @if ($order->order_status == "Menunggu Pembayaran" || $order->order_status == "Selesai")
+                                                <a href="#" class="btn btn-outline-primary disabled" >Kerjakan</a>
+                                            @else
+                                                <a href="#" class="btn btn-outline-primary">Kerjakan</a>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="text-end">
-                            <a href="{{route('publish.user_order_list')}}" class="btn btn-outline-primary">Lihat Semua</a>
-                        </div>
                     </div>
                 </div>
             </div>

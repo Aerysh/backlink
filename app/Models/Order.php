@@ -11,6 +11,15 @@ class Order extends Model
     use HasFactory;
 
     protected $table = 'orders';
+    protected $fillable =   [
+        'order_number',
+        'users_id',
+        'order_type',
+        'order_status',
+        'price',
+        'details',
+        'result',
+    ];
 
     public function website()
     {

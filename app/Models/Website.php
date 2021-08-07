@@ -28,7 +28,6 @@ class Website extends Model
     public function getWebsiteList()
     {
         return $this->where('users_id', Auth::id())
-                    ->where('status', )
                     ->get();
     }
 
@@ -50,7 +49,7 @@ class Website extends Model
     public function getOrderList()
     {
         return $this->where('users_id', Auth::id())
-                    ->has('Order')
+                    ->has('order')
                     ->get();
     }
 

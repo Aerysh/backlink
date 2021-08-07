@@ -67,19 +67,13 @@
                                         <td>    {{  date('d-M-Y h:m:s', strtotime($order->created_at))  }}    </td>
                                         {{-- <td>    {!! $order->order_status    !!}  </td> --}}
                                         <td>
-                                            @if ($order->order_status == "Selesai")
-                                                <span class="badge bg-success">Selesai</span>
-                                            @elseif ($order->order_status == "Sedang Dikerjakan")
-                                                <span class="badge bg-info">Sedang Dikerjakan</span>
-                                            @else
-                                                <span class="badge bg-secondary">Menunggu Pembayaran</span>
-                                            @endif
+                                            <div class="badge bg-info">{{  $order->order_status    }}</div>
                                         </td>
                                         <td>
-                                            @if ($order->order_status == "Menunggu Pembayaran")
-                                                <a href="#" class="btn btn-outline-primary disabled" >Edit</a>
+                                            @if ($order->order_status == "Menunggu Pembayaran" || $order->order_status == "Selesai")
+                                                <a href="#" class="btn btn-outline-primary disabled" >Kerjakan</a>
                                             @else
-                                                <a href="#" class="btn btn-outline-primary">Edit</a>
+                                                <a href="#" class="btn btn-outline-primary">Kerjakan</a>
                                             @endif
                                         </td>
                                     </tr>

@@ -19,8 +19,19 @@ Route::prefix('profile')->group(function () {
 // Marketplace Route
 Route::prefix('marketplace')->group(function () {
     Route::get('/', [App\Http\Controllers\MarketplaceController::class, 'index'])->name('marketplace.index');
-    Route::view('cart', 'marketplace.cart')->name('marketplace.cart');
     Route::get('cari', [App\Http\Controllers\MarketplaceController::class, 'search'])->name('marketplace.search_result');
+});
+
+Route::prefix('cart')->group(function () {
+    Route::get('/', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+    Route::get('/{id}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store_item');
+    Route::get('/delete/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.delete_item');
+    Route::post('bayar', [App\Http\Controllers\CartController::class, 'update'])->name('cart.testing');
+});
+
+Route::prefix('payment')->group(function () {
+    Route::get('/', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment.index');
+    Route::post('/', [App\Http\Controllers\PaymentController::class, 'store'])->name('payment.store');
 });
 
 // Publisher Route Group
@@ -35,7 +46,7 @@ Route::prefix('publish')->group(function () {
 
     });
 
-    // Website Route Group
+    // Publisher Website Route Group
     Route::prefix('website')->group(function () {
         // Show Publisher's Website List Page
         Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('publish.user_website_list');
@@ -62,6 +73,7 @@ Route::prefix('buyer')->group(function () {
 
 Route::prefix('info')->group(function () {
     Route::view('contact', 'info.contact')->name('info.contact');
+    // Website Info Details
+    Route::get('website/{id}', [App\Http\Controllers\WebsiteController::class, 'show'])->name('info.website_details');
 });
 
-Route::view('websiteDetails', 'info.website-details'); // Sementara

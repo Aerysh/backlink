@@ -4,6 +4,21 @@
 
 @section('content')
     <div class="section py-5 container border-bottom">
+        {{-- Alerts --}}
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                @if (Session::has('message_1'))
+                    <div class="alert alert-info" role="alert">
+                        <p class="text-center">{{  Session::get('message_1') }}</p>
+                    </div>
+                @endif
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        {{-- Alerts --}}
         <div class="row">
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Paling Laris</h5>
@@ -26,7 +41,7 @@
                                 <td>69</td>
                                 <td>60</td>
                                 <td>Rp. 50000</td>
-                                <td><a class="btn btn-outline-success" href="{{route('marketplace.cart')}}">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
+                                <td><a class="btn btn-outline-success" href="{{route('cart.index')}}">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
                             </tr>
                             <tr>
                                 <td hidden>2</td>
@@ -86,7 +101,6 @@
                     <table class="table table-hover text-center w-100">
                         <thead>
                             <tr>
-                                <th hidden>#</th>
                                 <th>Website</th>
                                 <th>DA</th>
                                 <th>PA</th>
@@ -96,15 +110,23 @@
                         </thead>
                         <tbody>
                             @foreach ($latest as $new)
-                                <tr>
-                                    <td hidden> {{  $new->id    }}  </td>
-                                    <td>    {{  $new->url   }}  </td>   {{-- URL To Website Detail --}}
-                                    <td>    {{  $new->domain_authority   }}  </td>
-                                    <td>    {{  $new->page_authority }}  </td>
-                                    <td>    {{  $new->price }}  </td>
-                                    <td>
-                                        <a href="#" class="btn btn-outline-success"><span class="fas fa-shopping-cart"></span> Tambah</a>
-                                    </td>
+                                    <tr>
+                                        <td>
+                                            <a href="{{route('info.website_details', ['id' => $new->id])}}" class="text-dark">
+                                                {{ $new->url }}
+                                            </a>
+                                        </td>
+                                        <td>{{ $new->domain_authority }}</td>
+                                        <td>{{ $new->page_authority }}</td>
+                                        <td>{{ $new->price }}</td>
+                                        <td>
+                                            <form action="{{route('cart.store_item', ['id' => $new->id])}}" method="GET">
+                                                <button type="submit" class="btn btn-outline-success">
+                                                    <span class="fas fa-shopping-cart"></span> Tambah
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
                             @endforeach
 
                         </tbody>
@@ -117,7 +139,6 @@
                     <table class="table table-hover text-center w-100">
                         <thead>
                             <tr>
-                                <th hidden>#</th>
                                 <th>Website</th>
                                 <th>DA</th>
                                 <th>PA</th>
@@ -128,14 +149,18 @@
                         <tbody>
                             @foreach ($cheapest as $cheap)
                                 <tr>
-                                    <td hidden> {{  $cheap->id  }}  </td>
-                                    <td>    {{  $cheap->url }}  </td>   {{-- URL To Website Detail --}}
+                                    <td>    {{  $cheap->url }}  </td>
                                     <td>    {{  $cheap->domain_authority    }}  </td>
                                     <td>    {{  $cheap->page_authority  }}  </td>
                                     <td>    {{  $cheap->price   }}  </td>
                                     <td>
-                                        <a href="#" class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Tambah</a>
+                                        <form action="{{route('cart.store_item', ['id' => $cheap->id])}}" method="GET">
+                                            <button type="submit" class="btn btn-outline-success">
+                                                <span class="fas fa-shopping-cart"></span> Tambah
+                                            </button>
+                                        </form>
                                     </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
