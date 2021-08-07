@@ -73,9 +73,11 @@ class WebsiteController extends Controller
      * @param  \App\Models\Website  $website
      * @return \Illuminate\Http\Response
      */
-    public function show(Website $website)
+    public function show($id)
     {
-        //
+        $websites = $this->websiteModel->getWebsiteById($id);
+
+        return view('info.website-details', compact('websites'));
     }
 
     /**

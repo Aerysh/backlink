@@ -71,7 +71,7 @@
                                                 <td>{{ $result->domain_authority }}</td>
                                                 <td>{{ $result->page_authority }}</td>
                                                 <td>Rp. {{ $result->price }}</td>
-                                                <td><a class="btn btn-outline-success" href="{{route('marketplace.cart')}}">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
+                                                <td><a class="btn btn-outline-success" href="{{route('cart.store_item', ['id' => $result->id])}}"><i class="fas fa-shopping-cart"></i> Tambah</a>
                                             </tr>
                                         @endforeach
                                     </tbody>

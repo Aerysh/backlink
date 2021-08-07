@@ -25,6 +25,12 @@
             Order
         </a>
     </li>
+    <hr>
+    <li>
+        <a href="{{route('payment.index')}}" class="nav-link text-white">
+            Payment
+        </a>
+    </li>
 @endsection
 
 {{-- Konten Utama --}}

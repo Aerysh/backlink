@@ -62,7 +62,7 @@
 
                         {{-- d-flex --}}
                         <div class="d-flex">
-                            <a href="{{route('marketplace.cart')}}" class="btn btn-outline-info me-2"><i class="fa fa-shopping-cart"></i> 1</a>
+                            <a href="{{route('cart.index')}}" class="btn btn-outline-info me-2"><i class="fa fa-shopping-cart"></i> {{ Cart::count() }}</a>
                             {{-- Check if Authentication Activated --}}
                             @if (Route::has('login'))
                                 {{-- Check if User Authenticated --}}
