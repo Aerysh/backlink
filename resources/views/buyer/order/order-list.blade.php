@@ -12,7 +12,7 @@
 {{-- Konten Sidebar --}}
 @section('sidebar')
 <li>
-    <p class="lead">Saldo : Rp. 0</p>
+    <p class="lead">Saldo : Rp. {{  Auth::user()->balance   }}</p>
 </li>
 <hr>
     <li>
@@ -66,7 +66,9 @@
                                         <td>    {{  $order->price   }}  </td>
                                         <td>    {{  date('d-M-y h:m:s', strtotime($order->created_at))  }}  </td>
                                         <td>    {{  $order->order_status    }}  </td>
-                                        <td>    </td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary">Detail</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
