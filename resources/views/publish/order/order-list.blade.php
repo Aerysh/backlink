@@ -37,6 +37,11 @@
 @section('panelContent')
     <div class="row">
         <div class="col-md-12">
+            @if (Session::has('message'))
+                <div class="alert alert-info" role="alert">
+                    {{  Session::get('message') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title lead">Daftar Order</h5>
@@ -51,7 +56,7 @@
                                     <th>    Harga   </th>
                                     <th>    Tanggal </th>
                                     <th>    Status  </th>
-                                    <th>    Edit  </th>
+                                    <th>      </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,9 +76,9 @@
                                         </td>
                                         <td>
                                             @if ($order->order_status == "Menunggu Pembayaran" || $order->order_status == "Selesai")
-                                                <a href="#" class="btn btn-outline-primary disabled" >Kerjakan</a>
+                                                <a href="#" class="btn btn-outline-primary disabled" >Lihat</a>
                                             @else
-                                                <a href="#" class="btn btn-outline-primary">Kerjakan</a>
+                                                <a href="{{ route('publish.user_show_order', ['id' => $order->id])}}" class="btn btn-outline-primary">Lihat</a>
                                             @endif
                                         </td>
                                     </tr>

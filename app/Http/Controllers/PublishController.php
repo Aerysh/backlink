@@ -45,4 +45,21 @@ class PublishController extends Controller
 
         return view('publish.order.order-list', compact('websites'));
     }
+
+    public function orderShow($id)
+    {
+        $orders = Order::where('id', $id)->get();
+
+        return view('publish.order.order-edit', compact('orders'));
+    }
+
+    public function orderUpdate(Request $request, $id)
+    {
+        Order::where('id', $id)->update([
+            'result'        =>  $request->result,
+            'order_status'  =>  'Selesai',
+        ]);
+
+        return redirect()->route('publish.user_order_list')->with('message', 'Order Berhasil Diupdate');
+    }
 }
