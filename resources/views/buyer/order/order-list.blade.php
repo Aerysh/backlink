@@ -67,7 +67,7 @@
                                         <td>    {{  date('d-M-y h:m:s', strtotime($order->created_at))  }}  </td>
                                         <td>    {{  $order->order_status    }}  </td>
                                         <td>
-                                            <a href="#" class="btn btn-primary">Detail</a>
+                                            <a href="{{route('buyer.user_order_details', ['id' => $order->id])}}" class="btn btn-primary">Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach
