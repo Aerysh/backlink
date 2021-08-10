@@ -140,4 +140,17 @@ class Website extends Model
 
     }
 
+    // Return user's website details to edit
+    public function edit($id)
+    {
+        $edit = $this->where('id', $id)->where('users_id', Auth::id())->get();
+
+        if($edit->isEmpty())
+        {
+            abort(403, 'Unauthorized Action');
+        }
+
+        return $edit;
+    }
+
 }
