@@ -88,7 +88,7 @@ class WebsiteController extends Controller
      */
     public function edit($id)
     {
-        $websites = $this->websiteModel->getWebsiteById($id);
+        $websites = $this->websiteModel->edit($id);
         $categories = Category::all();
 
         return view('publish.website.edit-website', compact('websites', 'categories'));
