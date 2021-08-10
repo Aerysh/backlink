@@ -43,6 +43,8 @@ Route::prefix('publish')->group(function () {
     Route::prefix('order')->group(function () {
         // Show Publisher's Incoming Order Page
         Route::get('/', [App\Http\Controllers\PublishController::class, 'orderList'])->name('publish.user_order_list');
+        Route::get('/edit/{id}', [App\Http\Controllers\PublishController::class, 'orderShow'])->name('publish.user_show_order');
+        Route::post('/update/{id}', [App\Http\Controllers\PublishController::class, 'orderUpdate'])->name('publish.user_update_order');
 
     });
 
@@ -57,7 +59,6 @@ Route::prefix('publish')->group(function () {
         // Publisher's Edit Website
         // Edit Website Under Construction Due To Other User Can Edit Website That Don't Belong To Them
         Route::get('edit/{id}', [App\Http\Controllers\WebsiteController::class, 'edit'])->name('publish.user_edit_website');
-
     });
 });
 

@@ -36,8 +36,10 @@
 {{-- Konten Utama --}}
 @section('panelContent')
     <div class="row">
+        <div class="col-md">
+        </div>
         @foreach ($orders as $order)
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-3">
@@ -72,12 +74,12 @@
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-4">
-                            <table>
+                            <table class="w-100">
                                 <tr>
                                     <td class="w-50">
                                         <strong>Status</strong>
                                     </td>
-                                    <td>Menunggu Pengiriman</td>
+                                    <td >{{  $order->order_status }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -85,28 +87,12 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <h5 class="lead">Detail</h5>
-                            <div class="table-responsive">
-                                <table class="w-100">
-                                    <tr>
-                                        <td class="w-25">Detail Konten</td>
-                                        <td class="w-75">
-                                            <textarea id="konten" class="form-control" disabled>
-                                                {{ $order->details }}
-                                            </textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="w-25">Hasil</td>
-                                        <td class="w-75">
-                                            @if ($order->result != "")
-                                                <a href="{{ $order->result  }}" class="btn btn-primary">Lihat Hasil</a>
-                                            @else
-                                                <a href="#" class="btn btn-primary disabled">Lihat Hasil</a>
-                                            @endif
-
-                                        </td>
-                                    </tr>
-                                </table>
+                            <div class="form-group mb-3">
+                                <label for="keterangan">Keterangan</label>
+                                <textarea id="keterangan" class="form-control" disabled>{{  $order->details }}</textarea>
+                            </div>
+                            <div class="form-group mb-3">
+                                <a href="{{ $order->result  }}" class="btn btn-primary" target="_blank">Lihat Hasil</a>
                             </div>
                         </div>
                     </div>
@@ -114,6 +100,8 @@
             </div>
         </div>
         @endforeach
+        <div class="col-md">
+        </div>
     </div>
 @endsection
 
@@ -126,7 +114,7 @@
 @section('js')
 <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('konten');
+        CKEDITOR.replace('keterangan');
     </script>
 @endsection
 
