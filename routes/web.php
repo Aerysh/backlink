@@ -68,6 +68,7 @@ Route::prefix('buyer')->group(function () {
     // Buyer Order Route Group
     Route::prefix('order')->group(function () {
         Route::get('/', [App\Http\Controllers\BuyerController::class, 'orderList'])->name('buyer.user_order_list');
+        Route::get('/details/{id}', [App\Http\Controllers\BuyerController::class, 'orderDetails'])->name('buyer.user_order_details');
     });
 });
 

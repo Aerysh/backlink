@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Auth;
 
 class BuyerController extends Controller
 {
@@ -39,5 +40,13 @@ class BuyerController extends Controller
         $orders = $this->orderModel->getOrderList();
 
         return view('buyer.order.order-list', compact('orders'));
+    }
+
+    // Display Order Details
+    public function orderDetails($id)
+    {
+        $orders = Order::where('id', $id)->where('users_id', Auth::id())->get();
+
+        return view('buyer.order.order-details', compact('orders'));
     }
 }

@@ -51,13 +51,13 @@
                     <table class="table table-hover w-100" id="paymentList">
                         <thead>
                             <tr>
-                                <th>Websites</th>
+                                <th>Website</th>
                                 <th>Total</th>
                                 <th>Metode Pembayaran</th>
                                 <th>Status</th>
                                 <th>Bukti</th>
                                 <th>Tanggal</th>
-                                <th>Bayar</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,7 +73,7 @@
                                     <td>    {{  $payment->status    }}  </td>
                                     <td>    {{  $payment->proof }}  </td>
                                     <td>    {{  date('d-M-y', strtotime($payment->created_at))}}    </td>
-                                    <td>    <a class="btn btn-primary">Bayar</a> </td>
+                                    <td>    <a class="btn btn-primary">Lihat</a> </td>
                                 </tr>
                             @endforeach
                         </tbody>
