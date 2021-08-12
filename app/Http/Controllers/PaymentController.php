@@ -48,12 +48,6 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        // Update Cart Data
-        foreach(range(0, Cart::count()-1) as $i)
-        {
-            Cart::update($request->id[$i], ['options' => ['details' => $request->post[$i]]]);
-        }
-
         // Check If User Currently Have Pending Order
         if($this->paymentModel->checkWaiting() > 0)
         {
@@ -61,7 +55,7 @@ class PaymentController extends Controller
         }
 
         // Check User's Payment Method
-        // Check If User's Use Saldo
+        // Check If User's Use Balance instead of bank transfer
         if($request->payment_method == 'saldo')
         {
             // Check If User's Balance is Sufficient
@@ -70,6 +64,26 @@ class PaymentController extends Controller
             }
             else
             {
+                // Update Cart Data
+                foreach(range(0, Cart::count()-1) as $i)
+                {
+                    // Check Order Type
+                    // If Order Type == 2 add 75000 to item's Price
+                    // Else Update Without New Price
+                    if($request->order_type[$i] == 2)
+                    {
+                        foreach(Cart::content() as $row);
+                        Cart::update($request->id[$i], [
+                            'price' => $row->price + 75000,
+                            'options' => [
+                                'details' => $request->post[$i],
+                                'order_type' => $request->order_type[$i],
+                                'users_website' =>  $request->users_website,
+                                ]
+                            ]);
+                    }
+
+                }
                 // Save Cart Data To Payment Table
                 $this->paymentModel->users_id       =   Auth::id();
                 $this->paymentModel->order_details  =   Cart::content();
@@ -83,7 +97,7 @@ class PaymentController extends Controller
                     $order = Order::create([
                         'order_number'  =>  strtoupper(Str::random(10)),
                         'users_id'      =>  Auth::id(),
-                        'order_type'    =>  1,
+                        'order_type'    =>  $collection->options->order_type,
                         'price'         =>  $collection->price,
                         'order_status'  =>  'Menunggu Pengiriman',
                         'details'       =>  $collection->options->details,
