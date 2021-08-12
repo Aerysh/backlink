@@ -45,23 +45,24 @@
                             </div>
                             <div class="card my-3">
                                 <div class="card-body">
-                                    {{-- <div class="form-group mb-3">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="postType{{$loop->index}}" id="postType{{$loop->index}}" checked>
-                                            <label class="form-check-label" for="postType1">Tulis Konten Sendiri</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="postType{{$loop->index}}" id="postType{{$loop->index}}">
-                                            <label class="form-check-label" for="postType2">Tulisan Dari Pemilik Website <small>(+Rp.75.000)</small></label>
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group mb-3">
-                                        <label for="post_{{$loop->index}}" class="form-label">Isi Konten</label>
-                                        <textarea class="editor" id="post_{{$loop->index}}" name="post[{{$loop->index}}]" rows="10" required>{{ $row->options->details }}</textarea>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="order_type[{{$loop->index}}]" id="order_type" value="1" checked>
+                                            <label class="form-check-label" for="order_type">Tulis Konten Sendiri</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="order_type[{{$loop->index}}]" id="order_type" value="2">
+                                            <label class="form-check-label" for="order_type">Tulisan Dari Pemilik Website <small>(+Rp.75.000)</small></label>
+                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="fileTambahan" class="form-label">File Tambahan</label>
-                                        <input class="form-control" type="file" id="fileTambahan">
+                                        <label for="post_{{$loop->index}}" class="form-label">Isi Konten*</label>
+                                        <textarea class="editor" id="post_{{$loop->index}}" name="post[{{$loop->index}}]" rows="10" required>{{ $row->options->details }}</textarea>
+                                        <small class="text-muted">Tuliskan semua kebutuhan seperti: alamat website anda, isi konten, deadline, kata kunci website anda, dll</small>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="users_website" class="form-label">Website URL*</label>
+                                        <input type="text" class="form-control" name="users_website" id="users_website" required>
                                     </div>
                                 </div>
                             </div>
@@ -77,17 +78,17 @@
                                 <div class="col-md-12">
                                     <table class="table table-borderless ">
                                         <tbody>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td width="60%">Website</td>
                                                 <td class="text-end">Rp. {{ Cart::subtotal() }}</td>
                                             </tr>
                                             <tr>
                                                 <td width="60%">Penulisan Konten</td>
                                                 <td class="text-end">Rp. 0</td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
-                                                <td width="60%"><h5 class="lead">Total</h5></td>
-                                                <td class="text-end"><h5 class="lead">Rp. {{ Cart::total() }}</h5></td>
+                                                <td width="60%"><h5 class="lead">Total Pembayaran</h5></td>
+                                                <td class="text-end"><h5 class="lead">Rp. {{ Cart::subtotal() }}</h5></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -130,7 +131,15 @@
     <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     <script>
         for(var i = 0; i < 100; i++){
-            CKEDITOR.replace('post_'+i);
+            var editor = CKEDITOR.replace('post_'+i, {
+                language: 'en',
+
+            });
+
+            editor.on( 'required', function( evt ) {
+                alert( 'Tolong Isi Semua Kebutuhan Konten Anda.' );
+                evt.cancel();
+            } );
         }
     </script>
 @endsection
