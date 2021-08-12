@@ -52,6 +52,7 @@
                                             <th>DA</th>
                                             <th>PA</th>
                                             <th>Harga</th>
+                                            <th>Waktu Pengiriman</th>
                                             <th>Beli</th>
                                         </tr>
                                     </thead>
@@ -59,7 +60,7 @@
                                         @foreach ($results as $result)
                                             <tr>
                                                 <td>
-                                                    <a class="text-dark" href="#">
+                                                    <a href="{{route('info.website_details', ['id' => $result->id])}}" class="text-dark">
                                                         {{ $result->url }}
                                                     </a>
                                                 </td>
@@ -71,6 +72,7 @@
                                                 <td>{{ $result->domain_authority }}</td>
                                                 <td>{{ $result->page_authority }}</td>
                                                 <td>Rp. {{ $result->price }}</td>
+                                                <td>{{ $result->delivery_time}} Hari </td>
                                                 <td><a class="btn btn-outline-success" href="{{route('cart.store_item', ['id' => $result->id])}}"><i class="fas fa-shopping-cart"></i> Tambah</a>
                                             </tr>
                                         @endforeach

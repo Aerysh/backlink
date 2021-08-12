@@ -20,6 +20,7 @@
         </div>
         {{-- Alerts --}}
         <div class="row">
+            {{-- Most Popular --}}
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Paling Laris</h5>
                 <div class="table-responsive">
@@ -63,7 +64,9 @@
                     </table>
                 </div>
             </div>
+            {{-- ! Most Popular --}}
 
+            {{-- Website Search --}}
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Cari</h5>
                 <form action="{{route('marketplace.search_result')}}" method="GET">
@@ -91,10 +94,12 @@
                     </div>
                 </form>
             </div>
+            {{-- ! Website Search --}}
         </div>
     </div>
     <div class="section py-5 container border-top">
         <div class="row">
+            {{-- Newest Website --}}
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Terbaru</h5>
                 <div class="table-responsive">
@@ -105,6 +110,7 @@
                                 <th>DA</th>
                                 <th>PA</th>
                                 <th>Harga</th>
+                                <th>Waktu Pengiriman</th>
                                 <th>Beli</th>
                             </tr>
                         </thead>
@@ -118,7 +124,8 @@
                                         </td>
                                         <td>{{ $new->domain_authority }}</td>
                                         <td>{{ $new->page_authority }}</td>
-                                        <td>{{ $new->price }}</td>
+                                        <td>Rp .{{ $new->price }}</td>
+                                        <td>{{ $new->delivery_time }} Hari</td>
                                         <td>
                                             <form action="{{route('cart.store_item', ['id' => $new->id])}}" method="GET">
                                                 <button type="submit" class="btn btn-outline-success">
@@ -133,6 +140,9 @@
                     </table>
                 </div>
             </div>
+            {{-- ! Newest Website --}}
+
+            {{-- Cheapest Website --}}
             <div class="col-md-6">
                 <h5 class="card-title mb-3">Paling Murah</h5>
                 <div class="table-responsive">
@@ -143,16 +153,22 @@
                                 <th>DA</th>
                                 <th>PA</th>
                                 <th>Harga</th>
+                                <th>Waktu Pengiriman</th>
                                 <th>Beli</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($cheapest as $cheap)
                                 <tr>
-                                    <td>    {{  $cheap->url }}  </td>
+                                    <td>
+                                        <a href="{{route('info.website_details', ['id' => $cheap->id])}}" class="text-dark">
+                                            {{ $cheap->url }}
+                                        </a>
+                                    </td>
                                     <td>    {{  $cheap->domain_authority    }}  </td>
                                     <td>    {{  $cheap->page_authority  }}  </td>
-                                    <td>    {{  $cheap->price   }}  </td>
+                                    <td>    Rp. {{  $cheap->price   }}  </td>
+                                    <td>    {{  $cheap->delivery_time   }} Hari</td>
                                     <td>
                                         <form action="{{route('cart.store_item', ['id' => $cheap->id])}}" method="GET">
                                             <button type="submit" class="btn btn-outline-success">
@@ -166,6 +182,7 @@
                     </table>
                 </div>
             </div>
+            {{-- ! Cheapest Website --}}
         </div>
     </div>
 @endsection
