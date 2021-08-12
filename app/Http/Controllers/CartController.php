@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Website;
 use App\Models\Payment;
+use Auth;
 
 
 class CartController extends Controller
@@ -17,12 +18,17 @@ class CartController extends Controller
      */
     public function index()
     {
-        // Cart::destroy();
-        if(Cart::content()->isEmpty())
-        {
-            return redirect()->route('marketplace.index')->with('message_1', 'Keranjang Anda Kosong');
+        // Check If User Is Logged In Or Not
+
+        if (Auth::check()){
+            if(Cart::content()->isEmpty())
+            {
+                return redirect()->route('marketplace.index')->with('message_1', 'Keranjang Anda Kosong');
+            }
+            return view('marketplace.cart.index');
         }
-        return view('marketplace.cart.index');
+
+        return redirect()->route('login');
     }
 
     /**
