@@ -59,7 +59,8 @@ class PaymentController extends Controller
         if($request->payment_method == 'saldo')
         {
             // Check If User's Balance is Sufficient
-            if( Auth::user()->balance < Cart::subtotal() ){
+            $newSaldo = Auth::user()->balance - Cart::subtotal();
+            if( Auth::user()->balance < Cart::subtotal() || $newSaldo < 9){
                 return redirect()->route('cart.index')->with('message_1', 'Saldo Anda Tidak Cukup');
             }
             else
@@ -113,7 +114,7 @@ class PaymentController extends Controller
                     'balance' =>  $newSaldo,
                 ]);
 
-                // // Delete Cart Content
+                // Delete Cart Content
                 Cart::destroy();
 
                 return redirect()->route('payment.index')->with('message', 'Pembayaran Berhasil, Pesanan Akan Diteruskan Ke Penjual');
