@@ -82,7 +82,7 @@
                                                 <td>    {{  $website->url   }} </td>
                                                 <td>
                                                     @foreach ($website->category as $category)
-                                                        {{$category->name}}
+                                                        {{$category->name}} <br/>
                                                     @endforeach
                                                 </td>
                                                 <td>    {{  $website->domain_authority  }}    </td>

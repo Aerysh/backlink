@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="description">Deskripsi Website</label>
-                            <textarea id="description" name="description" class="form-control" rows="5"></textarea>
+                            <textarea id="description" name="description" class="form-control" rows="5" placeholder="Deskripsi Singkat Website"></textarea>
                         </div>
                         <div class="form-group mb-3">
                             <label for="category">Kategori Website</label>

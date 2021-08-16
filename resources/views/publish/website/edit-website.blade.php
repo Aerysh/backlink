@@ -37,9 +37,9 @@
 @section('panelContent')
     <div class="row">
         <div class="col-md-12">
-            @if (Session::has('add-website-success'))
+            @if (Session::has('message'))
                 <div class="alert alert-success" role="alert">
-                    {{  Session::get('add-website-success') }}
+                    <p class="text-center">{{  Session::get('message') }}</p>
                 </div>
             @endif
         </div>
@@ -52,16 +52,16 @@
             <div class="card">
                 <div class="card-body">
                     @foreach ($websites as $website)
-                    <form method="POST" action="{{route('publish.user_store_website')}}">
+                    <form method="POST" action="{{route('publish.user_update_website')}}">
                         {{ csrf_field() }}
                         <input type="hidden" id="id" name="id" value="{{    $website->id    }}">
                         <div class="form-group mb-3">
                             <label for="url">Nama Domain</label>
-                            <input type="url" id="url" name="url" class="form-control" required placeholder="Nama Domain" value="{{ $website->url   }}">
+                            <input type="url" id="url" name="url" class="form-control" required placeholder="Nama Domain" value="{{ $website->url   }}" disabled>
                         </div>
                         <div class="form-group mb-3">
                             <label for="description">Deskripsi Website</label>
-                            <textarea id="description" name="description" class="form-control" rows="5">{{  $website->description   }}</textarea>
+                            <textarea id="description" name="description" class="form-control" rows="5" placeholder="Deskripsi Singkat Website">{{  $website->description   }}</textarea>
                         </div>
                         <div class="form-group mb-3">
                             <label for="category">Kategori Website</label>
@@ -74,11 +74,11 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="domain_authority">Domain Authority</label>
-                            <input type="number" min="0" max="100" id="domain_authority" name="domain_authority" class="form-control" required placeholder="Domain Authority" value="{{ $website->domain_authority  }}">
+                            <input disabled type="number" min="0" max="100" id="domain_authority" name="domain_authority" class="form-control" required placeholder="Domain Authority" value="{{ $website->domain_authority  }}">
                         </div>
                         <div class="form-group mb-3">
                             <label for="page_authority">Page Authority</label>
-                            <input type="number" min="0" max="100" id="page_authority" name="page_authority" class="form-control" required placeholder="Page Authority" value="{{   $website->page_authority    }}">
+                            <input disabled type="number" min="0" max="100" id="page_authority" name="page_authority" class="form-control" required placeholder="Page Authority" value="{{   $website->page_authority    }}">
                         </div>
                         <div class="form-group mb-3">
                             <label for="price">Harga</label>
@@ -112,11 +112,5 @@
 
 {{-- Javascript --}}
 @section('js')
-    <script>
-        $(document).ready( function () {
-            $('#website_list').DataTable({
-                responsive: true,
-            });
-        });
-    </script>
+
 @endsection

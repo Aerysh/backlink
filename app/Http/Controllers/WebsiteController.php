@@ -108,7 +108,17 @@ class WebsiteController extends Controller
         {
             return back()->with('order-exist', 'Maaf Anda Sedang Memiliki Pesanan, Silahkan Diselesaikan Terlebih Dahulu');
         }else{
+            $update = $this->websiteModel->where('id', $request->id)->update([
+                'description'   =>  $request->description,
+                'price'             =>  $request->price,
+                'delivery_time'     =>  $request->delivery_time
+            ]);
 
+            $updateCategory = Website::find($request->id);
+            $updateCategory->category()->detach();
+            $updateCategory->category()->attach($request->categories_id);
+
+            return back()->with('message', 'Website Berhasil Diperbarui !');
         }
     }
 

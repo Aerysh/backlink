@@ -107,7 +107,7 @@ class Website extends Model
     {
         $website = $this->where('website.id', $id)
                         ->joinRelationship('order')
-                        ->where('order.status', '=', 'Sedang Dikerjakan')
+                        ->where('order_status', '=', 'Sedang Dikerjakan')
                         ->get();
 
         if($website->first()){
