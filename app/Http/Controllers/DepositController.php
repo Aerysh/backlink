@@ -38,14 +38,15 @@ class DepositController extends Controller
      */
     public function store(Request $request)
     {
-        Deposit::create([
+        $deposit = Deposit::create([
             'users_id'      =>  Auth::id(),
             'amount'        =>  $request->sub,
             'proof'         =>  '',
             'status'        =>  'Menunggu Pembayaran'
         ]);
 
-        return redirect()->route('buyer.user_deposit_index');
+        $lastId = $deposit->id;
+        return redirect()->route('buyer.user_deposit_show', ['id' => $lastId]);
     }
 
     /**
@@ -67,7 +68,7 @@ class DepositController extends Controller
      */
     public function edit(User $user)
     {
-        //
+
     }
 
     /**

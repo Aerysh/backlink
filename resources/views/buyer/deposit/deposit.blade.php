@@ -103,6 +103,9 @@
                                         <td>{{ $deposit->status }}</td>
                                         <td>{{ $deposit->proof }}</td>
                                         <td>{{ date('d-m-Y h:i:s', strtotime($deposit->created_at)) }}</td>
+                                        <td>
+                                            <a href="{{route('buyer.user_deposit_show', ['id' => $deposit->id])}}" class="btn btn-primary">Lihat</a>
+                                        </td>
                                 @endforeach
                             </tbody>
                         </table>

@@ -57,8 +57,8 @@ Route::prefix('publish')->group(function () {
         // Publisher's Store Website
         Route::post('add-website', [App\Http\Controllers\WebsiteController::class, 'store'])->name('publish.user_store_website');
         // Publisher's Edit Website
-        // Edit Website Under Construction Due To Other User Can Edit Website That Don't Belong To Them
         Route::get('edit/{id}', [App\Http\Controllers\WebsiteController::class, 'edit'])->name('publish.user_edit_website');
+        Route::post('/edit', [App\Http\Controllers\WebsiteController::class, 'update'])->name('publish.user_update_website');
     });
 });
 
@@ -76,6 +76,7 @@ Route::prefix('buyer')->group(function () {
     Route::prefix('deposit')->group(function () {
         Route::get('/', [App\Http\Controllers\DepositController::class, 'index'])->name('buyer.user_deposit_index');
         Route::post('/', [App\Http\Controllers\DepositController::class, 'store'])->name('buyer.user_deposit_store');
+        Route::get('show/{id}', [App\Http\Controllers\DepositController::class, 'show'])->name('buyer.user_deposit_show');
     });
 });
 
