@@ -16,6 +16,12 @@
     </li>
     <hr>
     <li>
+        <a href="{{route('buyer.user_deposit_index')}}" class="nav-link text-white">
+            + Deposit
+        </a>
+    </li>
+    <hr>
+    <li>
         <a href="{{route('buyer.user_dashboard')}}" class="nav-link text-white">
             Dashboard
         </a>
@@ -27,7 +33,7 @@
     </li>
     <hr>
     <li>
-        <a href="{{route('payment.index')}}" class="nav-link text-white">
+        <a href="{{route('payment.index')}}" class="nav-link text-white active">
             Payment
         </a>
     </li>

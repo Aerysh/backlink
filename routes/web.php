@@ -71,6 +71,12 @@ Route::prefix('buyer')->group(function () {
         Route::get('/', [App\Http\Controllers\BuyerController::class, 'orderList'])->name('buyer.user_order_list');
         Route::get('/details/{id}', [App\Http\Controllers\BuyerController::class, 'orderDetails'])->name('buyer.user_order_details');
     });
+
+    // Buyer Balace Deposit Group
+    Route::prefix('deposit')->group(function () {
+        Route::get('/', [App\Http\Controllers\DepositController::class, 'index'])->name('buyer.user_deposit_index');
+        Route::post('/', [App\Http\Controllers\DepositController::class, 'store'])->name('buyer.user_deposit_store');
+    });
 });
 
 Route::prefix('info')->group(function () {

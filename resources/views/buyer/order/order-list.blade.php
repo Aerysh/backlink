@@ -11,10 +11,16 @@
 
 {{-- Konten Sidebar --}}
 @section('sidebar')
-<li>
-    <p class="lead">Saldo : Rp. {{  Auth::user()->balance   }}</p>
-</li>
-<hr>
+    <li>
+        <p class="lead">Saldo : Rp. {{  Auth::user()->balance   }}</p>
+    </li>
+    <hr>
+    <li>
+        <a href="{{route('buyer.user_deposit_index')}}" class="nav-link text-white">
+            + Deposit
+        </a>
+    </li>
+    <hr>
     <li>
         <a href="{{route('buyer.user_dashboard')}}" class="nav-link text-white">
             Dashboard
