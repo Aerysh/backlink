@@ -89,6 +89,7 @@
                         <table class="table w-100 text-center">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Jumlah</th>
                                     <th>Status</th>
                                     <th>Bukti</th>
@@ -99,6 +100,7 @@
                             <tbody>
                                 @foreach ($deposits as $deposit)
                                     <tr>
+                                        <td>{{$loop->index+1}}</td>
                                         <td>Rp. {{ $deposit->amount }}</td>
                                         <td>{{ $deposit->status }}</td>
                                         <td>{{ $deposit->proof }}</td>
@@ -124,4 +126,5 @@
 {{-- JS --}}
 @section('js')
 <script src="{{asset('assets/js/admin/admin.js')}}"></script>
+
 @endsection
