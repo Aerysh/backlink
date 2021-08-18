@@ -98,7 +98,44 @@
                     <h5 class="card-title lead">History Penarikan</h5>
                 </div>
                 <div class="card-body">
-
+                    <div class="table-responsive">
+                        <table class="table w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Metode</th>
+                                    <th>Nomor Penerima</th>
+                                    <th>Jumlah</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($withdraws as $withdraw)
+                                    <tr>
+                                        <td>
+                                            {{ $loop->index+1 }}
+                                        </td>
+                                        <td>
+                                            {{ $withdraw->method }}
+                                        </td>
+                                        <td>
+                                            {{ $withdraw->receiver_number }}
+                                        </td>
+                                        <td>
+                                            {{ $withdraw->amount }}
+                                        </td>
+                                        <td>
+                                            {{ $withdraw->status }}
+                                        </td>
+                                        <td>
+                                            {{ $withdraw->created_at }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

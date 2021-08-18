@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Withdraw;
+use Auth;
 
 class WithdrawController extends Controller
 {
+    protected $withdrawModel;
+
+    public function __construct()
+    {
+        $this->withdrawModel = new Withdraw();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,9 @@ class WithdrawController extends Controller
      */
     public function index()
     {
-        return view('publish.withdraw.index');
+        $withdraws = $this->withdrawModel->where('users_id', Auth::id())->get();
+
+        return view('publish.withdraw.index', compact('withdraws'));
     }
 
     /**
