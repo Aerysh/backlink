@@ -75,7 +75,7 @@
                                 {{-- Website Description --}}
                                 <div class="row mb-3">
                                     <p>
-                                        {!! $website->description !!}
+                                        {{ $website->description }}
                                     </p>
                                 </div>
                                 {{-- Website Description --}}
