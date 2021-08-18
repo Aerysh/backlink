@@ -65,6 +65,7 @@ Route::prefix('publish')->group(function () {
     Route::prefix('withdraw')->group(function () {
         Route::get('/', [App\Http\Controllers\WithdrawController::class, 'index'])->name('publisher.user_withdraw_index');
         Route::post('/', [App\Http\Controllers\WithdrawController::class, 'store'])->name('publisher.user_withdraw_store');
+        Route::get('/{id}', [App\Http\Controllers\WithdrawController::class, 'destroy'])->name('publisher.user_withdraw_destroy');
     });
 });
 

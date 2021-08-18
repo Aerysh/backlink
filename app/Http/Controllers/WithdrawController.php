@@ -115,6 +115,14 @@ class WithdrawController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = $this->withdrawModel->where('id', $id)->select('amount', 'admin')->get();
+        foreach($admin as $ad);
+        User::where('id', Auth::id())->update([
+            'balance'   =>  Auth::user()->balance + ($ad->amount + $ad->admin),
+        ]);
+
+        $this->withdrawModel->where('id', $id)->delete();
+
+        return back()->with('message', 'Pengajuan Penarikan Berhasil Dibatalkan!');
     }
 }
