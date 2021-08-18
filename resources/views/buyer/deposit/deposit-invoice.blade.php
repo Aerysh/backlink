@@ -45,13 +45,22 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
+            <div class="col-md-12">
+                @if (Session::has('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{  Session::get('message') }}
+                    </div>
+                @endif
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h5 class="lead card-title">Detail Deposit</h5>
                 </div>
                 <div class="card-body">
                     @foreach ($deposits as $deposit)
-                        <form>
+                        <form action="{{ route('buyer.user_deposit_update')}}" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input type="hidden" id="id" name="id" value="{{ $deposit->id }}">
                             <div class="form-group mb-3">
                                 <label for="amount">Jumlah Deposit</label>
                                 <input type="text" class="form-control" id="amount" name="amount" value="Rp. {{ $deposit->amount }}" disabled>
@@ -67,8 +76,8 @@
                             <div class="form-group mb-3">
                             @if ($deposit->proof == '')
                                 <div class="form-group mb-3">
-                                    <label for="proof_upload">Upload Bukti Pembayaran</label>
-                                    <input class="form-control" type="file" id="proof_upload" name="proof_upload">
+                                    <label for="image">Upload Bukti Pembayaran</label>
+                                    <input class="form-control" type="file" id="image" name="image">
                                 </div>
                                 <div class="form-group mb-3">
                                     <button type="submit" class="btn btn-primary">Upload Bukti</button>
@@ -77,7 +86,7 @@
                                 <div class="form-group mb-3">
                                     <label for="proof">Bukti Pembayaran</label>
                                     <div class="text-center">
-                                    <img class="img-thumbnail" src="https://picsum.photos/500" alt="Bukti pembayaran" height="200" width="200">
+                                    <img class="img-thumbnail" src="{{ asset('deposit_proof/'.$deposit->proof) }}" alt="Bukti pembayaran" height="200" width="200">
                                     </div>
                                 </div>
                             @endif

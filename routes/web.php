@@ -77,6 +77,7 @@ Route::prefix('buyer')->group(function () {
         Route::get('/', [App\Http\Controllers\DepositController::class, 'index'])->name('buyer.user_deposit_index');
         Route::post('/', [App\Http\Controllers\DepositController::class, 'store'])->name('buyer.user_deposit_store');
         Route::get('show/{id}', [App\Http\Controllers\DepositController::class, 'show'])->name('buyer.user_deposit_show');
+        Route::post('/update', [App\Http\Controllers\DepositController::class, 'update'])->name('buyer.user_deposit_update');
     });
 });
 

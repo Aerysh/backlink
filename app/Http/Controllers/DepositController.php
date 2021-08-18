@@ -55,9 +55,11 @@ class DepositController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $deposits = Deposit::where('id', $id)->where('users_id', Auth::id())->get();
+
+        return view('buyer.deposit.deposit-invoice', compact('deposits'));
     }
 
     /**
@@ -80,7 +82,20 @@ class DepositController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'image'  =>  'required|image|mimes:png,jpg,jpeg,gif|max:2048',
+        ]);
+
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('deposit_proof'), $imageName);
+
+        Deposit::where('id', $request->id)->update([
+            'proof' =>  $imageName,
+            'status'    =>  'Menunggu Persetujuan'
+        ]);
+
+        return back()->with('message', 'Bukti Deposit Berhasil Diupload!, Silahkan Hubungi Admin Untuk Konfirmasi.');
     }
 
     /**
