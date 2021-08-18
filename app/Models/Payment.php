@@ -12,7 +12,6 @@ class Payment extends Model
 
     protected $table = 'payment';
 
-
     public function encode($data)
     {
         foreach ($data as $d)
