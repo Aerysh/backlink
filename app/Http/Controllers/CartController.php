@@ -72,6 +72,7 @@ class CartController extends Controller
                 'domain_authority'  => $website->domain_authority,
                 'page_authority'    => $website->page_authority,
                 'delivery_time'     => $website->delivery_time,
+                'order_type'        =>  1,
                 ]
             ]);
 
