@@ -42,6 +42,13 @@
 @section('panelContent')
     <div class="row mb-3">
         <div class="col-md-12">
+            <div class="col-md-12">
+                @if (Session::has('message'))
+                    <div class="alert alert-info text-center" role="alert">
+                        {{  Session::get('message') }}
+                    </div>
+                @endif
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title lead">Penarikan</h5>
@@ -49,11 +56,17 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="" method="">
+                            <form action="{{ route('publisher.user_withdraw_store') }}" method="POST">
+                                {{ csrf_field() }}
                                 <div class="form-group mb-3">
                                     <label for="method">Metode Penarikan</label>
                                     <select class="form-select" id="method" name="method" required>
                                         <option value="" selected hidden disabled>Pilih Metode</option>
+                                        <option value="BRI">BRI</option>
+                                        <option value="Mandiri">Mandiri</option>
+                                        <option value="BNI">BNI</option>
+                                        <option value="BTN">BTN</option>
+                                        <option value="BSI">BSI</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -74,15 +87,15 @@
                                 <table class="table w-100">
                                     <tr>
                                         <td class="w-50">Jumlah</td>
-                                        <td></td>
+                                        <td id="subtotal"></td>
                                     </tr>
                                     <tr>
-                                        <td class="w-50">Biaya Admin</td>
-                                        <td></td>
+                                        <td class="w-50"><abbr title="5% dari jumlah penarikan">Admin</abbr></td>
+                                        <td id="admin"></td>
                                     </tr>
                                     <tr>
                                         <th class="w-50">Total</th>
-                                        <td></td>
+                                        <td id="total"></td>
                                 </table>
                             </div>
                         </div>
@@ -99,7 +112,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table w-100">
+                        <table class="table w-100 text-center">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -108,6 +121,7 @@
                                     <th>Jumlah</th>
                                     <th>Status</th>
                                     <th>Tanggal</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,7 +143,13 @@
                                             {{ $withdraw->status }}
                                         </td>
                                         <td>
-                                            {{ $withdraw->created_at }}
+                                            {{ date('d-m-Y h:i:s', strtotime($withdraw->created_at)) }}
+                                        </td>
+                                        <td>
+                                            <form action="" method="GET">
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-danger">Batal</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
