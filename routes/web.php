@@ -60,6 +60,11 @@ Route::prefix('publish')->group(function () {
         Route::get('edit/{id}', [App\Http\Controllers\WebsiteController::class, 'edit'])->name('publish.user_edit_website');
         Route::post('/edit', [App\Http\Controllers\WebsiteController::class, 'update'])->name('publish.user_update_website');
     });
+
+    // Publisher Withdrawal Route Group
+    Route::prefix('withdraw')->group(function () {
+        Route::get('/', [App\Http\Controllers\WithdrawController::class, 'index'])->name('publisher.user_withdraw_index');
+    });
 });
 
 // Buyer Route Group

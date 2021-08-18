@@ -31,6 +31,11 @@
             Order
         </a>
     </li>
+    <li>
+        <a href="{{route('publisher.user_withdraw_index')}}" class="nav-link text-white">
+            Penarikan
+        </a>
+    </li>
 @endsection
 
 {{-- Konten Utama --}}
