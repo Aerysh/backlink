@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Withdraw;
+use App\Models\User;
 use Auth;
 
 class WithdrawController extends Controller
@@ -45,7 +46,31 @@ class WithdrawController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Check if user have balance
+        if(Auth::user()->balance >= 0){
+            // Check if user balance >= total (amount * 0.05)
+            $total = floatval( ( (int)$request->amount) - ( ((int)$request->amount) * 0.05 ) );
+            if(Auth::user()->balance >= $total){
+
+                // Store to database
+                $this->withdrawModel->users_id          =   Auth::id();
+                $this->withdrawModel->method            =   $request->method;
+                $this->withdrawModel->receiver_number   =   $request->receiver_number;
+                $this->withdrawModel->amount            =   $total;
+                $this->withdrawModel->admin             =   (int)$request->amount * 0.05;
+                $this->withdrawModel->status            =   'Pending';
+                $this->withdrawModel->save();
+
+                // Update user's balance
+                User::where('id', Auth::id())->update([
+                    'balance'   =>  Auth::user()->balance - $request->amount,
+                ]);
+
+                return back()->with('message', 'Pengajuan Penarikan Saldo Berhasil!, Silahkan Hubungi Admin Untuk Konfirmasi');
+            }
+        }
+
+        return back()->with('message', 'Jumlah Penarikan Melebihi Saldo Anda!');
     }
 
     /**
@@ -90,6 +115,14 @@ class WithdrawController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = $this->withdrawModel->where('id', $id)->select('amount', 'admin')->get();
+        foreach($admin as $ad);
+        User::where('id', Auth::id())->update([
+            'balance'   =>  Auth::user()->balance + ($ad->amount + $ad->admin),
+        ]);
+
+        $this->withdrawModel->where('id', $id)->delete();
+
+        return back()->with('message', 'Pengajuan Penarikan Berhasil Dibatalkan!');
     }
 }
