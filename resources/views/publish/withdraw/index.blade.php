@@ -146,7 +146,7 @@
                                             {{ date('d-m-Y h:i:s', strtotime($withdraw->created_at)) }}
                                         </td>
                                         <td>
-                                            <form action="" method="GET">
+                                            <form action="{{ route('publisher.user_withdraw_destroy', ['id' => $withdraw->id])}}" method="GET">
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger">Batal</button>
                                             </form>
