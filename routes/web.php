@@ -10,6 +10,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Admin Routing
+Route::prefix('admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_dashboard');
+});
+
 // User Profile Route
 Route::prefix('profile')->group(function () {
     Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
