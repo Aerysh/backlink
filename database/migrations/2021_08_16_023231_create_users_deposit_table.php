@@ -18,7 +18,7 @@ class CreateUsersDepositTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('amount');
             $table->string('proof');
-            $table->enum('status', ['Telah Dibayar', 'Menunggu Pembayaran', 'Menunggu Persetujuan']);
+            $table->enum('status', ['Telah Dibayar', 'Menunggu Pembayaran', 'Menunggu Persetujuan', 'Ditolak']);
             $table->timestamps();
 
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');

@@ -23,7 +23,7 @@
         </a>
     </li>
     <li>
-        <a href="" class="nav-link text-white">
+        <a href="{{ route('admin.admin_deposit_dashboard') }}" class="nav-link text-white">
             Deposit
         </a>
     </li>

@@ -1,12 +1,12 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Pending Payment List')
+@section('title', 'Pending Deposit List')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
     <li class="breadcrumb-item">Admin</li>
-    <li class="breadcrumb-item active">Payment</li>
+    <li class="breadcrumb-item active">Deposit</li>
 @endsection
 
 {{-- Konten Sidebar --}}
@@ -18,12 +18,12 @@
     </li>
     <hr>
     <li>
-        <a href="{{ route('admin.admin_payment_dashboard') }}" class="nav-link text-white active">
+        <a href="{{ route('admin.admin_payment_dashboard') }}" class="nav-link text-white">
             Payment
         </a>
     </li>
     <li>
-        <a href="{{ route('admin.admin_deposit_dashboard') }}" class="nav-link text-white">
+        <a href="{{ route('admin.admin_deposit_dashboard') }}" class="nav-link text-white active">
             Deposit
         </a>
     </li>
@@ -50,52 +50,45 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title lead">Pending Payment</h5>
+                    <h5 class="card-title lead">Pending Deposit</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table w-100 text-center" id="payments">
+                        <table class="table w-100 text-center" id="deposits">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Website</th>
-                                    <th>Harga</th>
-                                    <th>Metode Pembayaran</th>
+                                    <th>Nama</th>
+                                    <th>Jumlah</th>
                                     <th>Bukti</th>
+                                    <th>Status</th>
                                     <th>Tanggal</th>
                                     <th></th>
-                                </tr>
                             </thead>
                             <tbody>
-                                @foreach ($payments as $payment)
+                                @foreach ($deposits as $deposit)
                                     <tr>
                                         <td>
-                                            {{ $loop->index+1 }}
-                                        </td>
-                                        @foreach (json_decode($payment->order_details) as $detail)
-                                            <td>
-                                                {{ $detail->name }}
-                                            </td>
-                                            <td>
-                                                Rp. {{ $detail->price }}
-                                            </td>
-                                        @endforeach
-                                        <td>
-                                            {{ $payment->payment_method }}
+                                            {{ $loop->index +1 }}
                                         </td>
                                         <td>
-                                            @if ( $payment->proof == '')
-                                                Belum Upload Bukti
-                                            @else
-                                                <a href="#proof" class="text-decoration-none">Lihat</a>
-                                            @endif
+                                            {{ $deposit->name }}
                                         </td>
                                         <td>
-                                            {{ date('d-m-Y h:i:s', strtotime($payment->created_at)) }}
+                                            Rp. {{ $deposit->amount }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.admin_payment_accept', ['id' => $payment->id]) }}" class="btn btn-outline-success">Terima</a>
-                                            <a href="{{ route('admin.admin_payment_decline', ['id' => $payment->id]) }}" class="btn btn-outline-danger">Tolak</a>
+                                            {{ $deposit->proof }}
+                                        </td>
+                                        <td>
+                                            {{ $deposit->status }}
+                                        </td>
+                                        <td>
+                                            {{ date('d-m-Y h:i:s', strtotime($deposit->created_at)) }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.admin_deposit_accept', ['id' => $deposit->id]) }}" class="btn btn-outline-success">Terima</a>
+                                            <a href="#" class="btn btn-outline-danger">Tolak</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -117,7 +110,7 @@
 @section('js')
     <script>
         $(document).ready( function () {
-            $('#payments').DataTable({
+            $('#deposits').DataTable({
                 responsive: true,
             });
         });
