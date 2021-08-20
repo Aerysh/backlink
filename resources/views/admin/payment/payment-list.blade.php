@@ -1,12 +1,12 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Pending Payment List')
+@section('title', 'Admin Dashboard')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
     <li class="breadcrumb-item">Admin</li>
-    <li class="breadcrumb-item active">Payment</li>
+    <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 
 {{-- Konten Sidebar --}}
@@ -23,7 +23,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ route('admin.admin_deposit_dashboard') }}" class="nav-link text-white">
+        <a href="" class="nav-link text-white">
             Deposit
         </a>
     </li>
