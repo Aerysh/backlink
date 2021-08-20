@@ -12,13 +12,13 @@
 {{-- Konten Sidebar --}}
 @section('sidebar')
     <li>
-        <a href="{{route('admin.admin_dashboard')}}" class="nav-link text-white active">
+        <a href="{{ route('admin.admin_dashboard') }}" class="nav-link text-white active">
             Dashboard
         </a>
     </li>
     <hr>
     <li>
-        <a href="" class="nav-link text-white">
+        <a href="{{ route('admin.admin_payment_dashboard') }}" class="nav-link text-white">
             Payment
         </a>
     </li>

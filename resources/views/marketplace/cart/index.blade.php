@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="post_{{$loop->index}}" class="form-label">Isi Konten*</label>
-                                        <textarea class="editor" id="post_{{$loop->index}}" name="post[{{$loop->index}}]" rows="10" required>{{ $row->options->details }}</textarea>
+                                        <textarea class="editor" id="post{{$loop->index}}" name="post[{{$loop->index}}]" rows="10" required>{{ $row->options->details }}</textarea>
                                         <small class="text-muted">Tuliskan semua kebutuhan seperti: alamat website anda, isi konten, deadline, kata kunci website anda, dll</small>
                                     </div>
                                     <div class="form-group mb-3">
@@ -131,7 +131,7 @@
     <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     <script>
         for(var i = 0; i < 100; i++){
-            var editor = CKEDITOR.replace('post_'+i, {
+            var editor = CKEDITOR.replace('post'+i, {
                 language: 'en',
 
             });

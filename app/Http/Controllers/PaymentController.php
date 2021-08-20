@@ -60,7 +60,7 @@ class PaymentController extends Controller
         {
             // Check If User's Balance is Sufficient
             $newSaldo = Auth::user()->balance - Cart::subtotal();
-            if( Auth::user()->balance < Cart::subtotal() || $newSaldo < 9){
+            if( Auth::user()->balance < Cart::subtotal() || $newSaldo < 0){
                 return redirect()->route('cart.index')->with('message_1', 'Saldo Anda Tidak Cukup');
             }
             else
@@ -71,9 +71,10 @@ class PaymentController extends Controller
                     // Check Order Type
                     // If Order Type == 2 add 75000 to item's Price
                     // Else Update Without New Price
+                    foreach(Cart::content() as $row);
+
                     if($request->order_type[$i] == 2)
                     {
-                        foreach(Cart::content() as $row);
                         Cart::update($request->id[$i], [
                             'price' => $row->price + 75000,
                             'options' => [
@@ -84,7 +85,17 @@ class PaymentController extends Controller
                             ]);
                     }
 
+                        Cart::update($request->id[$i], [
+                            'price' => $row->price,
+                            'options' => [
+                                'details' => $request->post[$i],
+                                'order_type' => $request->order_type[$i],
+                                'users_website' =>  $request->users_website,
+                                ]
+                            ]);
+
                 }
+
                 // Save Cart Data To Payment Table
                 $this->paymentModel->users_id       =   Auth::id();
                 $this->paymentModel->order_details  =   Cart::content();
