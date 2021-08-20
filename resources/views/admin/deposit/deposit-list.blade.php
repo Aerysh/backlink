@@ -88,7 +88,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.admin_deposit_accept', ['id' => $deposit->id]) }}" class="btn btn-outline-success">Terima</a>
-                                            <a href="#" class="btn btn-outline-danger">Tolak</a>
+                                            <a href="{{ route('admin.admin_deposit_decline', ['id' => $deposit->id]) }}" class="btn btn-outline-danger">Tolak</a>
                                         </td>
                                     </tr>
                                 @endforeach

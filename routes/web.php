@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('deposit')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\DepositController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_deposit_dashboard');
         Route::get('/accept/{id}', [App\Http\Controllers\Admin\DepositController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_deposit_accept');
+        Route::get('/decline/{id}', [App\Http\Controllers\Admin\DepositController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_deposit_decline');
     });
 });
 
