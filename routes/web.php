@@ -19,6 +19,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/accept/{id}', [App\Http\Controllers\Admin\PaymentController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_payment_accept');
         Route::get('/decline/{id}', [App\Http\Controllers\Admin\PaymentController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_payment_decline');
     });
+
+    // Admin's Users Pending Deposit Route
+    Route::prefix('deposit')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\DepositController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_deposit_dashboard');
+        Route::get('/accept/{id}', [App\Http\Controllers\Admin\DepositController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_deposit_accept');
+        Route::get('/decline/{id}', [App\Http\Controllers\Admin\DepositController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_deposit_decline');
+    });
 });
 
 // User Profile Route
