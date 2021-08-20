@@ -13,6 +13,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Admin Routing
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_dashboard');
+    // Admin Payment Route
+    Route::prefix('payments')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\PaymentController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_payment_dashboard');
+        Route::get('/accept/{id}', [App\Http\Controllers\Admin\PaymentController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_payment_accept');
+        Route::get('/decline/{id}', [App\Http\Controllers\Admin\PaymentController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_payment_decline');
+    });
 });
 
 // User Profile Route
