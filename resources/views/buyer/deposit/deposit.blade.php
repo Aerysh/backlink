@@ -64,12 +64,20 @@
                             <div class="col-md-6">
                                 <h5></h5>
                                 <div class="table-responsive">
-                                    <table class="table text-center">
+                                    <table class="table w-100">
                                         <tr>
-                                            <th class="w-50">Subtotal</th>
+                                            <th class="w-50">Jumlah</th>
                                             <td id="subtotal">Rp. 0</td>
                                         </tr>
+                                        <tr>
+                                            <th class="w-50">Admin</th>
+                                            <td id="admin">Rp. 0</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="w-50">Total</th>
+                                            <th id="total">Rp. 0</th>
                                     </table>
+                                    <small>Biaya admin 5% dari jumlah deposit</small>
                                 </div>
                             </div>
                         </div>
