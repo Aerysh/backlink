@@ -1,10 +1,10 @@
-    let admin = Math.floor((Math.random() * 1000) + 500);
-    $('#admin').html("Rp. " + admin);
     function change()
     {
-        var subtotal = (parseInt(document.getElementById('amount').value));
-        $('#jumlah').html("Rp. " + document.getElementById('amount').value)
-        $('#subtotal').html("Rp. " + parseInt(subtotal + admin))
-        $('#sub').val(parseInt(subtotal + admin));
-    }
+        var subtotal = parseInt(document.getElementById('amount').value);
+        var tax = parseInt(document.getElementById('amount').value) * 0.05;
 
+        $('#subtotal').html("Rp. "+ subtotal);
+        $('#admin').html("Rp. "+ tax);
+        $('#total').html("Rp. "+ parseInt(subtotal + tax));
+        document.getElementById('sub').value = subtotal + tax;
+    }

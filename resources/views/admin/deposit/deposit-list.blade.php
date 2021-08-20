@@ -87,8 +87,8 @@
                                             {{ date('d-m-Y h:i:s', strtotime($deposit->created_at)) }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.admin_deposit_accept', ['id' => $deposit->id]) }}" class="btn btn-outline-success">Terima</a>
-                                            <a href="{{ route('admin.admin_deposit_decline', ['id' => $deposit->id]) }}" class="btn btn-outline-danger">Tolak</a>
+                                            <a href="{{ route('admin.admin_deposit_accept', ['id' => $deposit->did]) }}" class="btn btn-outline-success">Terima</a>
+                                            <a href="{{ route('admin.admin_deposit_decline', ['id' => $deposit->did]) }}" class="btn btn-outline-danger">Tolak</a>
                                         </td>
                                     </tr>
                                 @endforeach

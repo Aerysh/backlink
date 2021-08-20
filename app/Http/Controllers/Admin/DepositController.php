@@ -16,7 +16,10 @@ class DepositController extends Controller
      */
     public function index()
     {
-        $deposits = Deposit::where('status', '=', 'Menunggu Persetujuan')->join('users', 'deposit.users_id', '=', 'users.id')->get();
+        $deposits = Deposit::where('status', '=', 'Menunggu Persetujuan')
+                    ->join('users', 'users.id', '=', 'deposit.users_id')
+                    ->select('deposit.*', 'users.*', 'users.id as uid', 'deposit.id as did')
+                    ->get();
 
         return view('admin.deposit.deposit-list', compact('deposits'));
     }
@@ -24,16 +27,10 @@ class DepositController extends Controller
     // Accept user's pending deposit
     public function accept($id)
     {
-        // Update Pending Deposit Status
-        Deposit::where('id', $id)->update([
-            'status'    =>  'Telah Dibayar',
-        ]);
-
         // Get Total Amount of Deposit - 1000
         $amount = Deposit::where('id', $id)->select('amount')->get();
         foreach($amount as $amt);
-        $amount = $amt->amount - 1000;
-        echo $amount;
+        $amount = $this->calculateBeforeTax($amt->amount);
 
         // Get User's ID
         $users_id = Deposit::where('id', $id)->select('users_id')->get();
@@ -50,6 +47,11 @@ class DepositController extends Controller
             }
 
         }
+
+        // Update Pending Deposit Status
+        Deposit::where('id', $id)->update([
+            'status'    =>  'Telah Dibayar',
+        ]);
         return back()->with('message', 'Pembayaran Diterima!, Saldo user akan diperbarui');
 
     }
@@ -61,5 +63,10 @@ class DepositController extends Controller
         ]);
 
         return back()->with('message', 'Pembayaran Ditolak, Informasi akan diteruskan ke user');
+    }
+
+    public function calculateBeforeTax($price)
+    {
+        return (100/(100 + 5) * $price);
     }
 }
