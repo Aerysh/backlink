@@ -71,11 +71,12 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="receiver_number">Nomor Penerima</label>
-                                    <input type="number" class="form-control" id="receiver_number" name="receiver_number" required>
+                                    <input type="text" class="form-control" id="receiver_number" name="receiver_number" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="amount">Jumlah Penarikan</label>
-                                    <input type="number" class="form-control" id="amount" name="amount" required>
+                                    <input type="number" class="form-control" id="amount" name="amount" onkeyup="change()" required>
+                                    <input type="hidden" class="form-control" id="total_amount" name="total_amount" required>
                                 </div>
                                 <div class="form-group mb-3 text-end">
                                     <button type="submit" class="btn btn-primary">Withdraw</button>
@@ -87,16 +88,17 @@
                                 <table class="table w-100">
                                     <tr>
                                         <td class="w-50">Jumlah</td>
-                                        <td id="subtotal"></td>
+                                        <td id="subtotal">Rp. 0</td>
                                     </tr>
                                     <tr>
-                                        <td class="w-50"><abbr title="5% dari jumlah penarikan">Admin</abbr></td>
-                                        <td id="admin"></td>
+                                        <td class="w-50">Admin</td>
+                                        <td id="admin">Rp. 0</td>
                                     </tr>
                                     <tr>
                                         <th class="w-50">Total</th>
-                                        <td id="total"></td>
+                                        <td id="total">Rp. 0</td>
                                 </table>
+                                <small>Biaya Admin 5% dari jumlah penarikan</small>
                             </div>
                         </div>
                     </div>
@@ -169,5 +171,5 @@
 
 {{-- Javascript --}}
 @section('js')
-
+    <script src="{{ asset('assets/js/admin/withdraw.js') }}" ></script>
 @endsection
