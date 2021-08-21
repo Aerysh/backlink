@@ -17,9 +17,8 @@ class CreateWithdrawsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->string('method');
-            $table->unsignedBigInteger('receiver_number');
+            $table->string('receiver_number');
             $table->unsignedBigInteger('amount');
-            $table->unsignedBigInteger('admin');
             $table->enum('status', ['Selesai', 'Pending']);
             $table->timestamps();
 

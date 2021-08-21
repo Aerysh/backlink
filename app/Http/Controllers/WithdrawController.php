@@ -29,16 +29,6 @@ class WithdrawController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,18 +36,16 @@ class WithdrawController extends Controller
      */
     public function store(Request $request)
     {
-        // Check if user have balance
-        if(Auth::user()->balance >= 0){
-            // Check if user balance >= total (amount * 0.05)
-            $total = floatval( ( (int)$request->amount) - ( ((int)$request->amount) * 0.05 ) );
-            if(Auth::user()->balance >= $total){
-
-                // Store to database
+        // Check If current user have balance
+        if(Auth::user()->balance > 0)
+        {
+            // Check if current user balance is sufficient
+            if(Auth::user()->balance > $request->total_amount)
+            {
                 $this->withdrawModel->users_id          =   Auth::id();
                 $this->withdrawModel->method            =   $request->method;
-                $this->withdrawModel->receiver_number   =   $request->receiver_number;
-                $this->withdrawModel->amount            =   $total;
-                $this->withdrawModel->admin             =   (int)$request->amount * 0.05;
+                $this->withdrawModel->receiver_number   =   sprintf($request->receiver_number);
+                $this->withdrawModel->amount            =   $request->total_amount;
                 $this->withdrawModel->status            =   'Pending';
                 $this->withdrawModel->save();
 
@@ -70,41 +58,7 @@ class WithdrawController extends Controller
             }
         }
 
-        return back()->with('message', 'Jumlah Penarikan Melebihi Saldo Anda!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return back()->with('message', 'Saldo Anda Tidak Mencukupi!');
     }
 
     /**
@@ -115,14 +69,30 @@ class WithdrawController extends Controller
      */
     public function destroy($id)
     {
-        $admin = $this->withdrawModel->where('id', $id)->select('amount', 'admin')->get();
-        foreach($admin as $ad);
+        // Get Withdraw Amount
+        $balance = $this->withdrawModel->where('id', $id)->select('amount')->get();
+        foreach($balance as $bal);
+
+        // Update User Balance
         User::where('id', Auth::id())->update([
-            'balance'   =>  Auth::user()->balance + ($ad->amount + $ad->admin),
+            // Update Balance + Balance Before Admin Cut
+            'balance'   =>  Auth::user()->balance + $this->getBalanceBeforeAdminCut($bal->amount),
         ]);
 
+        // Delete Record
         $this->withdrawModel->where('id', $id)->delete();
 
-        return back()->with('message', 'Pengajuan Penarikan Berhasil Dibatalkan!');
+        return back()->with('message', 'Pengajuan berhasil dibatalkan!');
+
+    }
+
+    /**
+     * Return initial balance before admin cut
+     *
+     * @param int $price
+     */
+    public function getBalanceBeforeAdminCut($price)
+    {
+        return ($price * 100)/95;
     }
 }

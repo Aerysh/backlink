@@ -69,7 +69,7 @@
                                 <table id="website_list" class="table table-responsive table-hover w-100 text-center">
                                     <thead>
                                         <tr>
-                                            <th hidden>#</th>
+                                            <th>    #   </th>
                                             <th>    Website </th>
                                             <th>    Kategori    </th>
                                             <th>    DA      </th>
@@ -83,7 +83,7 @@
                                     <tbody>
                                         @foreach ($websites as $website)
                                             <tr>
-                                                <td hidden>    {{  $website->id    }}  </td>
+                                                <td>    {{  $loop->index+1   }}  </td>
                                                 <td>    {{  $website->url   }} </td>
                                                 <td>
                                                     @foreach ($website->category as $category)
