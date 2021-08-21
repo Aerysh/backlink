@@ -91,6 +91,7 @@
                         <table class="table table-hover w-100 text-center" id="orderList">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Website</th>
                                     <th>Harga</th>
                                     <th>Tanggal</th>
@@ -100,6 +101,7 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
+                                        <td>{{ $loop->index+1 }}</td>
                                         @foreach ($order->website as $website)
                                             <td>    {{  $website->url   }}  </td>
                                         @endforeach
