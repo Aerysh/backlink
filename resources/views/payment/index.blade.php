@@ -57,6 +57,7 @@
                     <table class="table table-hover w-100" id="paymentList">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Website</th>
                                 <th>Total</th>
                                 <th>Metode Pembayaran</th>
@@ -69,6 +70,7 @@
                         <tbody>
                             @foreach ($payments as $payment)
                                 <tr>
+                                    <td>    {{  $loop->index+1    }}  </td>
                                     <td>
                                     @foreach (json_decode($payment->order_details) as $detail)
                                         {{  $detail->name    }} <br />

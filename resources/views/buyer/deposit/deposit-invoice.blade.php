@@ -42,16 +42,12 @@
 {{-- Konten Utama --}}
 @section('panelContent')
     <div class="row mb-3">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-8">
-            <div class="col-md-12">
-                @if (Session::has('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{  Session::get('message') }}
-                    </div>
-                @endif
-            </div>
+        <div class="col-md-6">
+            @if (Session::has('message'))
+                <div class="alert alert-success" role="alert">
+                    {{  Session::get('message') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h5 class="lead card-title">Detail Deposit</h5>
@@ -90,12 +86,38 @@
                                     </div>
                                 </div>
                             @endif
+                            </div>
                         </form>
                     @endforeach
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-6">
+            <div class="alert alert-info" role="alert">
+                <h5 class="alert-heading">List Channel Pembayaran</h5>
+                <table class="w-100">
+                    <tr>
+                        <td class="w-50">BRI</td>
+                        <td>00000 00000 00000</td>
+                    </tr>
+                    <tr>
+                        <td class="w-50">Mandiri</td>
+                        <td>000-00-0000000-0</td>
+                    </tr>
+                    <tr>
+                        <td class="w-50">BNI</td>
+                        <td>000 000 000 0</td>
+                    </tr>
+                    <tr>
+                        <td class="w-50">BTN</td>
+                        <td>000 000 000 0</td>
+                    </tr>
+                    <tr>
+                        <td class="w-50">BCA</td>
+                        <td>0000 0000 00</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
