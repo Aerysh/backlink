@@ -96,9 +96,9 @@
                                     </tr>
                                     <tr>
                                         <th class="w-50">Total</th>
-                                        <td id="total">Rp. 0</td>
+                                        <th id="total">Rp. 0</th>
                                 </table>
-                                <small>Biaya Admin 5% dari jumlah penarikan</small>
+                                {{-- <small>Biaya Admin 5% dari jumlah penarikan</small> --}}
                             </div>
                         </div>
                     </div>
