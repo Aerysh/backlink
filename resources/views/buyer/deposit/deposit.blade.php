@@ -1,12 +1,12 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Dasbor Pembeli')
+@section('title', 'Buyer Dashboard')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
     <li class="breadcrumb-item"><b>Buyer</b></li>
-    <li class="breadcrumb-item active">Dasbor</li>
+    <li class="breadcrumb-item active">Deposit</li>
 @endsection
 
 {{-- Konten Sidebar --}}
