@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Deposit;
 use Auth;
+use Illuminate\Support\Str;
+
 
 class DepositController extends Controller
 {
@@ -86,7 +88,7 @@ class DepositController extends Controller
             'image'  =>  'required|image|mimes:png,jpg,jpeg,gif|max:2048',
         ]);
 
-        $imageName = time().'.'.$request->image->extension();
+        $imageName = time().'_'.Str::random(10).'.'.$request->image->extension();
 
         $request->image->move(public_path('deposit_proof'), $imageName);
 

@@ -226,7 +226,7 @@ class PaymentController extends Controller
             'payment_proof' =>  'required|image|mimes:png,jpg,jpeg,gif|max:2048',
         ]);
 
-        $imageName = time().'.'.$request->payment_proof->extension();
+        $imageName = time().'_'.Str::random(10).'.'.$request->payment_proof->extension();
 
         $request->payment_proof->move(public_path('payment_proof'), $imageName);
 
