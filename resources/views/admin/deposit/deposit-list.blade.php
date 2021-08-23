@@ -78,7 +78,7 @@
                                             Rp. {{ $deposit->amount }}
                                         </td>
                                         <td>
-                                            {{ $deposit->proof }}
+                                            <a href="{{ asset('deposit_proof/'.$deposit->proof) }}" class="text-decoration-none" target="_blank">Lihat Bukti</a>
                                         </td>
                                         <td>
                                             {{ $deposit->status }}
