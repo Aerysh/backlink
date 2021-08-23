@@ -77,7 +77,7 @@
                                             <th class="w-50">Total</th>
                                             <th id="total">Rp. 0</th>
                                     </table>
-                                    <small>Biaya admin 5% dari jumlah deposit</small>
+                                    {{-- <small>Biaya admin 5% dari jumlah deposit</small> --}}
                                 </div>
                             </div>
                         </div>
@@ -133,6 +133,6 @@
 
 {{-- JS --}}
 @section('js')
-<script src="{{asset('assets/js/admin/admin.js')}}"></script>
+<script src="{{asset('assets/js/admin/deposit_admin_rate.js')}}"></script>
 
 @endsection

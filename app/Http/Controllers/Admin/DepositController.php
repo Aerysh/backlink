@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class DepositController extends Controller
 {
+    // Admin Rate Percentage
+    // example:
+    // no rate = 0
+    // 5% rate = 0.05
+    protected $adminRate = 0;
+
     /**
      * Display a listing of the resource.
      *
@@ -27,20 +33,20 @@ class DepositController extends Controller
     // Accept user's pending deposit
     public function accept($id)
     {
-        // Get Total Amount of Deposit - 1000
+        // Get Total Amount of Deposit
         $amount = Deposit::where('id', $id)->select('amount')->get();
         foreach($amount as $amt);
         $amount = $this->calculateBeforeTax($amt->amount);
 
-        // Get User's ID
+        // Get User's ID from deposit table
         $users_id = Deposit::where('id', $id)->select('users_id')->get();
         foreach($users_id as $uid){
-            // Get Current User's Balance
+            // Get Current User's Balance with user id = deposit users_id
             $current = User::where('id', $uid->users_id)->select('balance')->get();
             foreach($current as $curr){
                 $current = $curr->balance;
 
-                // Get User's ID then update the user's balance + deposit amount
+                // update the user's balance + deposit amount
                 User::where('id', $uid->users_id)->update([
                     'balance'   =>  $current + $amount,
                 ]);
@@ -48,14 +54,16 @@ class DepositController extends Controller
 
         }
 
-        // Update Pending Deposit Status
+        // Update Deposit Status
         Deposit::where('id', $id)->update([
             'status'    =>  'Telah Dibayar',
         ]);
+
         return back()->with('message', 'Pembayaran Diterima!, Saldo user akan diperbarui');
 
     }
 
+    // decline deposit request
     public function decline($id)
     {
         Deposit::where('id', $id)->update([
@@ -65,8 +73,9 @@ class DepositController extends Controller
         return back()->with('message', 'Pembayaran Ditolak, Informasi akan diteruskan ke user');
     }
 
+    // return deposit value before admin rate is added
     public function calculateBeforeTax($price)
     {
-        return (100/(100 + 5) * $price);
+        return (100/(100 + $this->adminRate) * $price);
     }
 }
