@@ -1,11 +1,11 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Daftar Order')
+@section('title', 'Publisher Dashboard')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
-    <li class="breadcrumb-item"><b>Penerbit</b></li>
+    <li class="breadcrumb-item"><b>Publisher</b></li>
     <li class="breadcrumb-item active">Order</li>
 @endsection
 
@@ -17,7 +17,7 @@
     <hr>
     <li>
         <a href="{{route('publish.user_dashboard')}}" class="nav-link text-white">
-            Dasbor
+            Dashboard
         </a>
     </li>
     <li>

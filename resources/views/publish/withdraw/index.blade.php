@@ -1,12 +1,12 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Penarikan')
+@section('title', 'Publisher Dashboard')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
-    <li class="breadcrumb-item"><b>Penerbit</b></li>
-    <li class="breadcrumb-item active">Dasbor</li>
+    <li class="breadcrumb-item"><b>Publisher</b></li>
+    <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 
 {{-- Konten Sidebar --}}
@@ -17,7 +17,7 @@
     <hr>
     <li>
         <a href="{{route('publish.user_dashboard')}}" class="nav-link text-white">
-            Dasbor
+            Dashboard
         </a>
     </li>
     <li>
