@@ -44,7 +44,7 @@
         <div class="col-md-12">
             @if (Session::has('message'))
                 <div class="alert alert-info" role="alert">
-                    {{  Session::get('message') }}
+                    <p class="text-center">{{  Session::get('message') }}</p>
                 </div>
             @endif
             <div class="card">
@@ -61,6 +61,7 @@
                                     <th>    Website </th>
                                     <th>    Harga   </th>
                                     <th>    Tanggal </th>
+                                    <th>    Deadline    </th>
                                     <th>    Status  </th>
                                     <th>      </th>
                                 </tr>
@@ -70,22 +71,20 @@
                                     <tr>
                                         <td>    {{  $loop->index+1  }}  </td>
                                         <td>
-                                            @foreach ($website->order as $order)
-                                                {{  $order->order_number    }}
-                                            @endforeach
+                                                {{  $website->order_number    }}
                                         </td>
-                                        <td>    {{  $website->url   }}  </td>
-                                        <td>    {{  $order->price }}    </td>
-                                        <td>    {{  date('d-M-Y h:m:s', strtotime($order->created_at))  }}    </td>
-                                        {{-- <td>    {!! $order->order_status    !!}  </td> --}}
+                                        <td>    {{  $website->name   }}  </td>
+                                        <td>    {{  $website->price }}    </td>
+                                        <td>    {{  date('d-M-Y h:i:s', strtotime($website->created_at))  }}    </td>
+                                        <td>    {{  date('d-m-Y h:i:s', strtotime($website->created_at . '+' . $website->delivery_time . ' days'))}}
                                         <td>
-                                            <div class="badge bg-info">{{  $order->order_status    }}</div>
+                                            <div class="badge bg-info">{{  $website->order_status    }}</div>
                                         </td>
                                         <td>
-                                            @if ($order->order_status == "Menunggu Pembayaran" || $order->order_status == "Selesai")
+                                            @if ($website->order_status == "Selesai")
                                                 <a href="#" class="btn btn-outline-primary disabled" >Lihat</a>
                                             @else
-                                                <a href="{{ route('publish.user_show_order', ['id' => $order->id])}}" class="btn btn-outline-primary">Lihat</a>
+                                                <a href="{{ route('publish.user_show_order', ['id' => $website->id])}}" class="btn btn-outline-primary">Lihat</a>
                                             @endif
                                         </td>
                                     </tr>

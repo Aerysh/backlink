@@ -48,9 +48,11 @@ class Website extends Model
 
     public function getOrderList()
     {
-        return $this->where('users_id', Auth::id())
-                    ->has('order')
-                    ->get();
+        return $this->where('website.users_id', Auth::id())
+                ->join('order_website', 'order_website.website_id', '=', 'website.id')
+                ->join('orders', 'orders.id', '=', 'order_website.order_id')
+                ->select('website.url as name', 'website.delivery_time', 'orders.*')
+                ->get();
     }
 
     // This Function Get User's Website Count

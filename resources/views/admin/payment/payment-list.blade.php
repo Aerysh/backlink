@@ -68,18 +68,33 @@
                             </thead>
                             <tbody>
                                 @foreach ($payments as $payment)
+
                                     <tr>
                                         <td>
                                             {{ $loop->index+1 }}
                                         </td>
-                                        @foreach (json_decode($payment->order_details) as $detail)
+
                                             <td>
-                                                {{ $detail->name }}
+                                                @foreach (json_decode($payment->order_details) as $detail)
+                                                {{ $detail->name }} <br/>
+                                                @endforeach
                                             </td>
                                             <td>
-                                                Rp. {{ $detail->price }}
+
+                                                @php
+                                                    $total = 0;
+                                                @endphp
+
+                                                @foreach( json_decode($payment->order_details) as $details)
+                                                    @php
+                                                        $total += $details->price;
+                                                        $total += $details->tax;
+                                                    @endphp
+                                                @endforeach
+
+                                                Rp. {{ (int)$total }}
                                             </td>
-                                        @endforeach
+
                                         <td>
                                             {{ $payment->payment_method }}
                                         </td>
@@ -87,7 +102,7 @@
                                             @if ( $payment->proof == '')
                                                 Belum Upload Bukti
                                             @else
-                                                <a href="#proof" class="text-decoration-none">Lihat</a>
+                                                <a href="{{ asset('payment_proof/'.$payment->proof)}}" class="text-decoration-none" target="_blank">Lihat</a>
                                             @endif
                                         </td>
                                         <td>
@@ -98,6 +113,7 @@
                                             <a href="{{ route('admin.admin_payment_decline', ['id' => $payment->id]) }}" class="btn btn-outline-danger">Tolak</a>
                                         </td>
                                     </tr>
+
                                 @endforeach
                             </tbody>
                         </table>

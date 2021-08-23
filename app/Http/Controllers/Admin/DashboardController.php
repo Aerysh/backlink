@@ -18,7 +18,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $paymentCount = Payment::where('status', '=', 'waiting')->count();
+        $paymentCount = Payment::where('status', '=', 'Menunggu Persetujuan')->count();
         $depositCount = Deposit::where('status', '=', 'Menunggu Persetujuan')->count();
         $withdrawCount = Withdraw::where('status', '=', 'Pending')->count();
         $websiteCount = Website::where('status', '=', 'Waiting')->count();

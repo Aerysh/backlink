@@ -19,7 +19,7 @@ class CreatePaymentTable extends Migration
             $table->longText('order_details');
             $table->enum('payment_method', ['transfer', 'saldo']);
             $table->string('proof')->default('');
-            $table->enum('status', ['waiting', 'paid', 'declined']);
+            $table->enum('status', ['Telah Dibayar', 'Menunggu Pembayaran', 'Menunggu Persetujuan', 'Ditolak']);
             $table->timestamps();
 
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');

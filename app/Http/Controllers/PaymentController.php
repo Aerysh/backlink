@@ -48,12 +48,6 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        // Check If User Currently Have Pending Order
-        if($this->paymentModel->checkWaiting() > 0)
-        {
-            return redirect()->route('buyer.user_order_list')->with('message', 'Anda Memiliki Order Yang Belum Dibayar');
-        }
-
         // Check User's Payment Method
         // Check If User's Use Balance instead of bank transfer
         if($request->payment_method == 'saldo')
@@ -66,40 +60,38 @@ class PaymentController extends Controller
             else
             {
                 // Update Cart Data
-                foreach(range(0, Cart::count()-1) as $i)
-                {
                     // Check Order Type
                     // If Order Type == 2 add 75000 to item's Price
                     // Else Update Without New Price
-                    foreach(Cart::content() as $row);
-
-                    if($request->order_type[$i] == 2)
-                    {
-                        Cart::update($request->id[$i], [
-                            'price' => $row->price + 75000,
-                            'options' => [
-                                'details' => $request->post[$i],
-                                'order_type' => $request->order_type[$i],
-                                'users_website' =>  $request->users_website,
-                                ]
-                            ]);
+                    $i = 0;
+                    foreach(Cart::content() as $row){
+                        if($request->order_type[$i] == 2)
+                        {
+                            Cart::update($request->id[$i], [
+                                'price' => $row->price + 75000,
+                                'options' => [
+                                    'details' => $request->post[$i],
+                                    'order_type' => $request->order_type[$i],
+                                    'users_website' =>  $request->users_website,
+                                    ]
+                                ]);
+                        }else{
+                            Cart::update($request->id[$i], [
+                                'price' => $row->price,
+                                'options' => [
+                                    'details' => $request->post[$i],
+                                    'order_type' => $request->order_type[$i],
+                                    'users_website' =>  $request->users_website,
+                                    ]
+                                ]);
+                        }
+                        $i++;
                     }
-
-                        Cart::update($request->id[$i], [
-                            'price' => $row->price,
-                            'options' => [
-                                'details' => $request->post[$i],
-                                'order_type' => $request->order_type[$i],
-                                'users_website' =>  $request->users_website,
-                                ]
-                            ]);
-
-                }
 
                 // Save Cart Data To Payment Table
                 $this->paymentModel->users_id       =   Auth::id();
                 $this->paymentModel->order_details  =   Cart::content();
-                $this->paymentModel->status         =   'paid';
+                $this->paymentModel->status         =   'Telah Dibayar';
                 $this->paymentModel->payment_method =   $request->payment_method;
                 $this->paymentModel->save();
 
@@ -112,7 +104,7 @@ class PaymentController extends Controller
                         'order_type'    =>  $collection->options->order_type,
                         'price'         =>  $collection->price,
                         'order_status'  =>  'Menunggu Pengiriman',
-                        'details'       =>  $collection->options->details,
+                        'details'       =>  $collection->options->details . '<br> Website Tujuan : ' . $collection->optsions->users_website,
                         'result'        =>  ''
                     ]);
 
@@ -134,10 +126,53 @@ class PaymentController extends Controller
         // If User Use Bank Transfer
         else
         {
+            // Check If User Currently Have Pending Order
+            if($this->paymentModel->checkWaiting() > 0)
+            {
+                return redirect()->route('payment.index')->with('message', 'Anda Memiliki Order Yang Belum Dibayar');
+            }
+
+            // Update Cart Data
+                // Check Order Type
+                // If Order Type == 2 add 75000 to item's Price
+                // Else Update Without New Price
+                $i = 0;
+                foreach(Cart::content() as $row){
+                    if($request->order_type[$i] == 2)
+                    {
+                        Cart::update($request->id[$i], [
+                            'price' => $row->price + 75000,
+                            'options' => [
+                                'details' => $request->post[$i],
+                                'order_type' => $request->order_type[$i],
+                                'users_website' =>  $request->users_website,
+                                ]
+                            ]);
+                    }else{
+                        Cart::update($request->id[$i], [
+                            'price' => $row->price,
+                            'options' => [
+                                'details' => $request->post[$i],
+                                'order_type' => $request->order_type[$i],
+                                'users_website' =>  $request->users_website,
+                                ]
+                            ]);
+                    }
+                    $i++;
+                }
+
+                // Save Cart Data To Payment Table
+                $this->paymentModel->users_id       =   Auth::id();
+                $this->paymentModel->order_details  =   Cart::content();
+                $this->paymentModel->status         =   'Menunggu Pembayaran';
+                $this->paymentModel->payment_method =   $request->payment_method;
+                $this->paymentModel->save();
+
+                Cart::destroy();
+
+                return redirect()->route('payment.show', ['id' => $this->paymentModel->id]);
 
         }
-
-        // return redirect()->route('payment.index');
     }
 
     /**
@@ -146,9 +181,25 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $payments = $this->paymentModel->where('id', $id)->where('users_id', Auth::id())->get();
+
+        $priceTotal = 0;
+        $contentTotal = 0;
+        $adminTotal = 0;
+        foreach($payments as $pay){
+            foreach(json_decode($pay->order_details) as $details){
+                $priceTotal += $details->price;
+                $adminTotal += $details->tax;
+                if($details->options->order_type == 2){
+                    $priceTotal = $priceTotal - 75000;
+                    $contentTotal += 75000;
+                }
+            }
+        }
+
+        return view('payment.invoice', compact('payments', 'priceTotal', 'adminTotal', 'contentTotal'));
     }
 
     /**
@@ -171,7 +222,20 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        //
+        $request->validate([
+            'payment_proof' =>  'required|image|mimes:png,jpg,jpeg,gif|max:2048',
+        ]);
+
+        $imageName = time().'.'.$request->payment_proof->extension();
+
+        $request->payment_proof->move(public_path('payment_proof'), $imageName);
+
+        Payment::where('id', $request->id)->update([
+            'proof' =>  $imageName,
+            'status'    =>  'Menunggu Persetujuan'
+        ]);
+
+        return back()->with('message', 'Bukti Berhasil Diupload!, Silahkan Hubungi Admin Untuk Konfirmasi.');
     }
 
     /**

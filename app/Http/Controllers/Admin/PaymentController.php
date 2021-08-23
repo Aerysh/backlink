@@ -17,7 +17,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::where('status', '=', 'waiting')->get();
+        $payments = Payment::where('status', '=', 'Menunggu Persetujuan')->get();
 
         return view('admin.payment.payment-list', compact('payments'));
     }
@@ -26,24 +26,26 @@ class PaymentController extends Controller
     public function accept($id)
     {
         Payment::where('id', $id)->update([
-            'status'    =>  'paid',
+            'status'    =>  'Telah Dibayar',
         ]);
 
         $payments = Payment::where('id', $id)->get();
         foreach($payments as $payment)
         {
-            foreach(json_decode($payment->order_details) as $details);
-            $order = Order::create([
-                'order_number'  =>  strtoupper(Str::random(10)),
-                'users_id'      =>  $payment->users_id,
-                'order_type'    =>  $details->options->order_type,
-                'price'         =>  $details->price,
-                'order_status'  =>  'Menunggu Pengiriman',
-                'details'       =>  $details->options->details,
-                'result'        =>  ''
-            ]);
+            foreach(json_decode($payment->order_details) as $details){
+                $order = Order::create([
+                    'order_number'  =>  strtoupper(Str::random(10)),
+                    'users_id'      =>  $payment->users_id,
+                    'order_type'    =>  $details->options->order_type,
+                    'price'         =>  $details->price,
+                    'order_status'  =>  'Menunggu Pengiriman',
+                    'details'       =>  $details->options->details . '<br> Website Tujuan : ' . $details->options->users_website,
+                    'result'        =>  ''
+                ]);
 
-            $order->website()->attach($details->id);
+                $order->website()->attach($details->id);
+            }
+
         }
 
         return back()->with('message', 'Pembayaran diterima!, order diteruskan kepada penjual.');
