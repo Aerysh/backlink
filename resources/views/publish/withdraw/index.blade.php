@@ -59,7 +59,7 @@
                             <form action="{{ route('publisher.user_withdraw_store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group mb-3">
-                                    <label for="method">Metode Penarikan</label>
+                                    <label for="method">Rekening Tujuan</label>
                                     <select class="form-select" id="method" name="method" required>
                                         <option value="" selected hidden disabled>Pilih Metode</option>
                                         <option value="BRI">BRI</option>
@@ -68,6 +68,10 @@
                                         <option value="BTN">BTN</option>
                                         <option value="BSI">BSI</option>
                                     </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="receiver_name">Nama Penerima</label>
+                                    <input type="text" class="form-control" id="receiver_name" name="receiver_name" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="receiver_number">Nomor Penerima</label>
@@ -114,11 +118,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table w-100 text-center">
+                        <table class="table w-100 text-center" id="withdraws">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Metode</th>
+                                    <th>Rekening Tujuan</th>
+                                    <th>Nama Penerima</th>
                                     <th>Nomor Penerima</th>
                                     <th>Jumlah</th>
                                     <th>Status</th>
@@ -135,6 +140,8 @@
                                         <td>
                                             {{ $withdraw->method }}
                                         </td>
+                                        <td>
+                                            {{ $withdraw->receiver_name }}</td>
                                         <td>
                                             {{ $withdraw->receiver_number }}
                                         </td>
@@ -172,4 +179,11 @@
 {{-- Javascript --}}
 @section('js')
     <script src="{{ asset('assets/js/admin/withdraw.js') }}" ></script>
+    <script>
+        $(document).ready( function () {
+            $('#withdraws').DataTable({
+                responsive: true,
+            });
+        });
+    </script>
 @endsection

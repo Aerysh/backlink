@@ -11,6 +11,9 @@ class WithdrawController extends Controller
 {
     protected $withdrawModel;
 
+
+
+
     public function __construct()
     {
         $this->withdrawModel = new Withdraw();
@@ -40,10 +43,11 @@ class WithdrawController extends Controller
         if(Auth::user()->balance > 0)
         {
             // Check if current user balance is sufficient
-            if(Auth::user()->balance > $request->total_amount)
+            if($request->total_amount <= Auth::user()->balance)
             {
                 $this->withdrawModel->users_id          =   Auth::id();
                 $this->withdrawModel->method            =   $request->method;
+                $this->withdrawModel->receiver_name     =   $request->receiver_name;
                 $this->withdrawModel->receiver_number   =   sprintf($request->receiver_number);
                 $this->withdrawModel->amount            =   $request->total_amount;
                 $this->withdrawModel->status            =   'Pending';
@@ -51,13 +55,14 @@ class WithdrawController extends Controller
 
                 // Update user's balance
                 User::where('id', Auth::id())->update([
-                    'balance'   =>  Auth::user()->balance - $request->amount,
+                    'balance'   =>  Auth::user()->balance - $request->total_amount,
                 ]);
 
                 return back()->with('message', 'Pengajuan Penarikan Saldo Berhasil!, Silahkan Hubungi Admin Untuk Konfirmasi');
             }
         }
 
+        echo Auth::user()->balance;
         return back()->with('message', 'Saldo Anda Tidak Mencukupi!');
     }
 
@@ -87,12 +92,21 @@ class WithdrawController extends Controller
     }
 
     /**
-     * Return initial balance before admin cut
+     * Admin Rate Cut
      *
      * @param int $price
+     * Formula:
+     * price * (100 / ( 100 - admin rate))
      */
+
+    // Change This To Other Percentage
+    // example :
+    // $rate = 5 means 5% admin rate
+    protected $rate = 0;
+
     public function getBalanceBeforeAdminCut($price)
     {
-        return ($price * 100)/95;
+        // return ($price * 100)/$this->rate;
+        return $price * (100/(100 - $this->rate));
     }
 }
