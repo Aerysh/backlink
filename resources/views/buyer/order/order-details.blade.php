@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Detail Pembelian')
+@section('title', 'Buyer Dashboard')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
