@@ -76,12 +76,23 @@
                                         {{  $detail->name    }} <br />
                                     @endforeach
                                     </td>
-                                    <td>    Rp. {{  $detail->price  }}  </td>
+                                    <td>    @php
+                                        $total = 0;
+                                    @endphp
+
+                                    @foreach( json_decode($payment->order_details) as $details)
+                                        @php
+                                            $total += $details->price;
+                                            $total += $details->tax;
+                                        @endphp
+                                    @endforeach
+
+                                    Rp. {{ (int)$total }}  </td>
                                     <td>    {{  $payment->payment_method    }}  </td>
                                     <td>    {{  $payment->status    }}  </td>
                                     <td>    {{  $payment->proof }}  </td>
-                                    <td>    {{  date('d-M-y', strtotime($payment->created_at))}}    </td>
-                                    <td>    <a class="btn btn-primary">Lihat</a> </td>
+                                    <td>    {{  date('d-m-Y h:i:s', strtotime($payment->created_at))}}    </td>
+                                    <td>    <a href="{{route('payment.show', ['id' => $payment->id])}}" class="btn btn-primary">Lihat</a> </td>
                                 </tr>
                             @endforeach
                         </tbody>

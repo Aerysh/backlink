@@ -50,6 +50,8 @@ Route::prefix('cart')->group(function () {
 Route::prefix('payment')->group(function () {
     Route::get('/', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment.index');
     Route::post('/', [App\Http\Controllers\PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/show/{id}', [App\Http\Controllers\PaymentController::class, 'show'])->name('payment.show');
+    Route::post('/update', [App\Http\Controllers\PaymentController::class, 'update'])->name('payment.update');
 });
 
 // Publisher Route Group

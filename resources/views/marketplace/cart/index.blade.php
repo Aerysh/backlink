@@ -47,11 +47,11 @@
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="order_type[{{$loop->index}}]" id="order_type" value="1" checked>
+                                            <input class="form-check-input" type="radio" name="order_type[{{$loop->index}}]" id="order_type" value="1" checked onclick="delContent()">
                                             <label class="form-check-label" for="order_type">Tulis Konten Sendiri</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="order_type[{{$loop->index}}]" id="order_type" value="2">
+                                            <input class="form-check-input" type="radio" name="order_type[{{$loop->index}}]" id="order_type" value="2" onclick="addContent()">
                                             <label class="form-check-label" for="order_type">Tulisan Dari Pemilik Website <small>(+Rp.75.000)</small></label>
                                         </div>
                                     </div>
@@ -87,9 +87,23 @@
                                                 <td class="text-end">Rp. 0</td>
                                             </tr> --}}
                                             <tr>
-                                                <td width="60%"><h5 class="lead">Total Pembayaran</h5></td>
+                                                <td width="60%"><h5 class="lead">Harga</h5></td>
                                                 <td class="text-end"><h5 class="lead">Rp. {{ Cart::subtotal() }}</h5></td>
                                             </tr>
+                                            <tr>
+                                                <td width="60%"><h5 class="lead">Admin</h5></td>
+                                                <td class="text-end"><h5 class="lead" id="admin">Rp. 0</h5></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%"><h5 class="lead">Admin</h5></td>
+                                                <td class="text-end"><h5 class="lead">Rp. {{ (int)Cart::tax() }}</h5></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="60%"><h5>Total</h5></th>
+
+                                                <th class="text-end"><h5 id="total">Rp. {{ (int)Cart::total() }}</h5></th>
+                                            </tr>
+                                            <th class="sr-only" id="tot">{{Cart::total()}}</th>
                                         </tbody>
                                     </table>
                                     <div class="mb-3">
@@ -128,9 +142,10 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('assets/js/admin/content.js')}}"></script>
     <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     <script>
-        for(var i = 0; i < 100; i++){
+        for(var i = 0; i < '{{Cart::count()}}'; i++){
             var editor = CKEDITOR.replace('post'+i, {
                 language: 'en',
 
@@ -142,4 +157,5 @@
             } );
         }
     </script>
+
 @endsection

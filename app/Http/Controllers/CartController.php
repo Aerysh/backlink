@@ -49,7 +49,9 @@ class CartController extends Controller
      */
     public function store($id)
     {
-        $websites = Website::where('id', $id)->get();
+        if(Cart::count() <=5)
+        {
+            $websites = Website::where('id', $id)->get();
 
         foreach($websites as $website);
 
@@ -77,6 +79,9 @@ class CartController extends Controller
             ]);
 
         return redirect()->route('cart.index')->with('message_2', 'Item Berhasil Ditambahkan');
+        }
+
+        return redirect()->route('cart.index')->with('message_1', 'Jumlah Barang Melebihi Batas!');
     }
 
     /**
