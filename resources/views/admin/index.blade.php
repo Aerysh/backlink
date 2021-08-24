@@ -28,7 +28,7 @@
         </a>
     </li>
     <li>
-        <a href="" class="nav-link text-white">
+        <a href="{{ route('admin.admin_withdraw_dashboard') }}" class="nav-link text-white">
             Withdraw
         </a>
     </li>

@@ -91,8 +91,8 @@
                                     <th>    Website </th>
                                     <th>    Harga   </th>
                                     <th>    Tanggal </th>
+                                    <th>    Deadline    </th>
                                     <th>    Status  </th>
-                                    <th>    Edit  </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,23 +100,14 @@
                                     <tr>
                                         <td>    {{  $loop->index+1  }}  </td>
                                         <td>
-                                            @foreach ($website->order as $order)
-                                                {{  $order->order_number    }}
-                                            @endforeach
+                                                {{  $website->order_number    }}
                                         </td>
-                                        <td>    {{  $website->url   }}  </td>
-                                        <td>    {{  $order->price }}    </td>
-                                        <td>    {{  date('d-M-Y h:m:s', strtotime($order->created_at))  }}    </td>
-                                        {{-- <td>    {!! $order->order_status    !!}  </td> --}}
+                                        <td>    {{  $website->name   }}  </td>
+                                        <td>    {{  $website->price }}    </td>
+                                        <td>    {{  date('d-M-Y h:i:s', strtotime($website->created_at))  }}    </td>
+                                        <td>    {{  date('d-m-Y h:i:s', strtotime($website->created_at . '+' . $website->delivery_time . ' days'))}}
                                         <td>
-                                            <div class="badge bg-info">{{  $order->order_status    }}</div>
-                                        </td>
-                                        <td>
-                                            @if ($order->order_status == "Menunggu Pembayaran" || $order->order_status == "Selesai")
-                                                <a href="#" class="btn btn-outline-primary disabled" >Kerjakan</a>
-                                            @else
-                                                <a href="#" class="btn btn-outline-primary">Kerjakan</a>
-                                            @endif
+                                            <div class="badge bg-info">{{  $website->order_status    }}</div>
                                         </td>
                                     </tr>
                                 @endforeach
