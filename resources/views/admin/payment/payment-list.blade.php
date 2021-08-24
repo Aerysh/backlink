@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 
 {{-- Judul Halaman --}}
-@section('title', 'Pending Payment List')
+@section('title', 'Admin Dashboard')
 
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
@@ -28,7 +28,7 @@
         </a>
     </li>
     <li>
-        <a href="" class="nav-link text-white">
+        <a href="{{ route('admin.admin_withdraw_dashboard') }}" class="nav-link text-white">
             Withdraw
         </a>
     </li>

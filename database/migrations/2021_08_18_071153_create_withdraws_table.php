@@ -20,7 +20,7 @@ class CreateWithdrawsTable extends Migration
             $table->string('receiver_name');
             $table->string('receiver_number');
             $table->unsignedBigInteger('amount');
-            $table->enum('status', ['Selesai', 'Pending']);
+            $table->enum('status', ['Completed', 'Waiting', 'Declined']);
             $table->timestamps();
 
             $table->foreign('users_id')->references('id')->on('users');

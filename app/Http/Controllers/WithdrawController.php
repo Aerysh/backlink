@@ -50,7 +50,7 @@ class WithdrawController extends Controller
                 $this->withdrawModel->receiver_name     =   $request->receiver_name;
                 $this->withdrawModel->receiver_number   =   sprintf($request->receiver_number);
                 $this->withdrawModel->amount            =   $request->total_amount;
-                $this->withdrawModel->status            =   'Pending';
+                $this->withdrawModel->status            =   'Waiting';
                 $this->withdrawModel->save();
 
                 // Update user's balance

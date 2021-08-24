@@ -26,6 +26,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/accept/{id}', [App\Http\Controllers\Admin\DepositController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_deposit_accept');
         Route::get('/decline/{id}', [App\Http\Controllers\Admin\DepositController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_deposit_decline');
     });
+
+    // Admin Pending Withdraw Route Group
+    Route::prefix('withdraw')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\WithdrawController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_withdraw_dashboard');
+        Route::get('/accept/{id}', [App\Http\Controllers\Admin\WithdrawController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_withdraw_accept');
+        Route::get('/decline/{id}', [App\Http\Controllers\Admin\WithdrawController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_withdraw_decline');
+    });
 });
 
 // User Profile Route
