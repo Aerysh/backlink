@@ -60,6 +60,6 @@ class PublishController extends Controller
             'order_status'  =>  'Selesai',
         ]);
 
-        return redirect()->route('publish.user_order_list')->with('message', 'Order Berhasil Diupdate');
+        return redirect()->route('publish.user_order_list')->with('message', 'Order Berhasil Diupdate!, Silahkan Tunggu 1x24 Jam Hingga Saldo Masuk Ke Akun Anda.');
     }
 }
