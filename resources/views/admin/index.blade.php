@@ -43,8 +43,8 @@
 @section('panelContent')
     {{-- Stats --}}
     <div class="row mb-3">
-        <div class="col-lg-3">
-            <div class="card">
+        <div class="col-md-3">
+            <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-title lead">Pending Payment</h5>
                 </div>
@@ -54,19 +54,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title lead">Pending Deposit</h5>
-                </div>
-                <div class="card-body">
-                    <h1 class="text-muted text-center">{{ $depositCount }}</h1>
-                    <h5 class="text-center text-muted">Total</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
+        <div class="col-md-3">
+            <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-title lead">Pending Withdraw</h5>
                 </div>
@@ -76,8 +65,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="card">
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title lead">Pending Deposit</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="text-muted text-center">{{ $depositCount }}</h1>
+                    <h5 class="text-center text-muted">Total</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-title lead">Pending Website</h5>
                 </div>
@@ -94,10 +94,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title lead"></h5>
+                    <h5 class="card-title lead">Total Pendapatan</h5>
                 </div>
                 <div class="card-body">
-
+                    <div id="chart" style="height: 300px;"></div>
                 </div>
             </div>
         </div>
@@ -113,5 +113,19 @@
 
 {{-- JS --}}
 @section('js')
+{{-- Charting Library --}}
+<script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+{{-- Chartisan --}}
+<script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 
+<script>
+  const chart = new Chartisan({
+    el: '#chart',
+    url: "@chart('income')",
+    hooks: new ChartisanHooks()
+    .legend()
+    .colors()
+    .tooltip(),
+  });
+</script>
 @endsection
