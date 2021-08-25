@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="users_website" class="form-label">Website URL*</label>
-                                        <input type="text" class="form-control" name="users_website" id="users_website" required>
+                                        <input type="text" class="form-control" name="users_website" id="users_website" required value={{ $row->options->users_website }}>
                                     </div>
                                 </div>
                             </div>
@@ -80,15 +80,20 @@
                                         <tbody>
                                             <tr>
                                                 <td width="60%"><h5 class="lead">Harga</h5></td>
-                                                <td class="text-end"><h5 class="lead">Rp. {{ Cart::subtotal() }}</h5></td>
+                                                <td class="text-end">
+                                                    <h5 class="lead">Rp. {{ Cart::subtotal() }}
+                                                    </h5>
+                                                </td>
+                                                <td class="sr-only" id="subtotal">{{ Cart::subtotal() }}</td>
+
                                             </tr>
                                             <tr>
                                                 <td width="60%"><h5 class="lead">Content</h5></td>
                                                 <td class="text-end"><h5 class="lead" id="content">Rp. 0</h5></td>
                                             </tr>
                                             <tr>
-                                                <td width="60%"><h5 class="lead">Admin</h5></td>
-                                                <td class="text-end"><h5 class="lead">Rp. {{ (int)Cart::tax() }}</h5></td>
+                                                <td width="60%"><h5 class="lead">Admin </h5></td>
+                                                <td class="text-end"><h5 class="lead" id="admin">Rp. {{ (int)Cart::tax() }}</h5></td>
                                             </tr>
                                             <tr>
                                                 <th width="60%"><h5>Total</h5></th>

@@ -104,7 +104,7 @@ class PaymentController extends Controller
                         'order_type'    =>  $collection->options->order_type,
                         'price'         =>  $collection->price,
                         'order_status'  =>  'Menunggu Pengiriman',
-                        'details'       =>  $collection->options->details . '<br> Website Tujuan : ' . $collection->optsions->users_website,
+                        'details'       =>  $collection->options->details . '<br> Website Tujuan : ' . $collection->options->users_website,
                         'result'        =>  ''
                     ]);
 
