@@ -78,21 +78,13 @@
                                 <div class="col-md-12">
                                     <table class="table table-borderless ">
                                         <tbody>
-                                            {{-- <tr>
-                                                <td width="60%">Website</td>
-                                                <td class="text-end">Rp. {{ Cart::subtotal() }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Penulisan Konten</td>
-                                                <td class="text-end">Rp. 0</td>
-                                            </tr> --}}
                                             <tr>
                                                 <td width="60%"><h5 class="lead">Harga</h5></td>
                                                 <td class="text-end"><h5 class="lead">Rp. {{ Cart::subtotal() }}</h5></td>
                                             </tr>
                                             <tr>
-                                                <td width="60%"><h5 class="lead">Admin</h5></td>
-                                                <td class="text-end"><h5 class="lead" id="admin">Rp. 0</h5></td>
+                                                <td width="60%"><h5 class="lead">Content</h5></td>
+                                                <td class="text-end"><h5 class="lead" id="content">Rp. 0</h5></td>
                                             </tr>
                                             <tr>
                                                 <td width="60%"><h5 class="lead">Admin</h5></td>

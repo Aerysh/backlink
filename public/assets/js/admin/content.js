@@ -1,18 +1,20 @@
-var admin = 0;
-var total = parseInt(document.getElementById('tot').innerHTML);
+var content = 0;
+var x = parseInt(document.getElementById('tot').innerHTML);
 
-function addContent(){
-    total += 75000
-    admin += 75000
-    $('#admin').html('Rp. '+admin);
-    $('#total').html('Rp.'+total);
-    $('#tot').html(total)
+function addContent()
+{
+    content += 75000;
+    x       += 75000;
+
+    $('#content').html('Rp. '+content);
+    $('#total').html('Rp. '+x);
+    $('#tot').html(x);
 }
 
 function delContent(){
-    total -= 75000
-    admin -= 75000
-    $('#admin').html('Rp. '+admin);
-    $('#total').html('Rp.'+total);
-    $('#tot').html(total)
+    content -= 75000
+    x -= 75000
+    $('#content').html('Rp. '+content);
+    $('#total').html('Rp.'+x);
+    $('#tot').html(x)
 }

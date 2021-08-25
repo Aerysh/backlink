@@ -98,7 +98,11 @@
                                 <textarea id="keterangan" class="form-control" disabled>{{  $order->details }}</textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <a href="{{ $order->result  }}" class="btn btn-primary" target="_blank">Lihat Hasil</a>
+                                @if ($order->result == '')
+                                    Hasil Belum Dikirim Oleh Penjual
+                                @else
+                                    <a href="{{ $order->result  }}" class="btn btn-primary" target="_blank">Lihat Hasil</a>
+                                @endif
                             </div>
                         </div>
                     </div>
