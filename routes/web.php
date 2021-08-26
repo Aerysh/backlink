@@ -33,6 +33,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/accept/{id}', [App\Http\Controllers\Admin\WithdrawController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_withdraw_accept');
         Route::get('/decline/{id}', [App\Http\Controllers\Admin\WithdrawController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_withdraw_decline');
     });
+
+    // Admin Pending Website Route Group
+    Route::prefix('website')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\WebsiteController::class, 'index'])->middleware('can:isAdmin')->name('admin.admin_website_dashboard');
+        Route::get('accept/{id}', [App\Http\Controllers\Admin\WebsiteController::class, 'accept'])->middleware('can:isAdmin')->name('admin.admin_website_accept');
+        Route::get('decline/{id}', [App\Http\Controllers\Admin\WebsiteController::class, 'decline'])->middleware('can:isAdmin')->name('admin.admin_website_decline');
+    });
 });
 
 // User Profile Route
