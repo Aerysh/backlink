@@ -6,7 +6,7 @@
 {{-- Konten Breadcrumb --}}
 @section('breadcrumb')
     <li class="breadcrumb-item">Admin</li>
-    <li class="breadcrumb-item active">Withdraw</li>
+    <li class="breadcrumb-item active">Website</li>
 @endsection
 
 {{-- Konten Sidebar --}}
@@ -28,12 +28,12 @@
         </a>
     </li>
     <li>
-        <a href="{{ route('admin.admin_withdraw_dashboard') }}" class="nav-link text-white active">
+        <a href="{{ route('admin.admin_withdraw_dashboard') }}" class="nav-link text-white">
             Withdraw
         </a>
     </li>
     <li>
-        <a href="{{ route('admin.admin_website_dashboard') }}" class="nav-link text-white">
+        <a href="{{ route('admin.admin_website_dashboard') }}" class="nav-link text-white active">
             Website
         </a>
     </li>
@@ -41,7 +41,7 @@
 
 {{-- Konten Utama --}}
 @section('panelContent')
-    <div class="row mb-3">
+    <div class="row">
         <div class="col-md-12">
             @if (Session::has('message'))
                 <div class="alert alert-info" role="alert">
@@ -50,36 +50,37 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title lead">Withdraw Request</h5>
+                    <h5 class="card-title lead">Website List</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table w-100" id="withdraws">
+                        <table class="table w-100 text-center" id="websites">
                             <thead>
                                 <tr>
                                     <th> # </th>
-                                    <th> Metode </th>
-                                    <th> Nama Penerima </th>
-                                    <th> Nomor Penerima </th>
-                                    <th> Jumlah Penarikan </th>
-                                    <th> Status </th>
-                                    <th> Tanggal </th>
-                                    <th> </th>
+                                    <th> Website </th>
+                                    <th> Deskripsi </th>
+                                    <th> DA </th>
+                                    <th> PA </th>
+                                    <th> Harga </th>
+                                    <th> Waktu Pengiriman </th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($withdraws as $withdraw)
+                                @foreach ($websites as $website)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $withdraw->method }}</td>
-                                        <td>{{ $withdraw->receiver_name }}</td>
-                                        <td>{{ $withdraw->receiver_number }}</td>
-                                        <td>{{ $withdraw->amount }}</td>
-                                        <td>{{ $withdraw->status }}</td>
-                                        <td>{{ date('d-m-Y h:i:s', strtotime($withdraw->created_at)) }}</td>
+                                        <td>{{ $website->url }}</td>
+                                        <td>{{ $website->description }}</td>
+                                        <td>{{ $website->domain_authority }}</td>
+                                        <td>{{ $website->page_authority }}</td>
+                                        <td>{{ $website->price }}</td>
+                                        <td>{{ $website->delivery_time }} Hari</td>
                                         <td>
-                                            <a href="{{ route('admin.admin_withdraw_accept', ['id' => $withdraw->id]) }}" class="btn btn-outline-success">Selesai</a>
-                                            <a href="{{ route('admin.admin_withdraw_decline', ['id' => $withdraw->id]) }}" class="btn btn-outline-danger">Tolak</a>
+                                            <a href="#" class="btn btn-outline-primary">Detail</a>
+                                            <a href="{{ route('admin.admin_website_accept', ['id' => $website->id]) }}" class="btn btn-outline-success">Terima</a>
+                                            <a href="{{ route('admin.admin_website_decline', ['id' => $website->id]) }}" class="btn btn-outline-danger">Tolak</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -99,11 +100,11 @@
 
 {{-- JS --}}
 @section('js')
-    <script>
-        $(document).ready( function () {
-            $('#withdraws').DataTable({
-                responsive: true,
-            });
+<script>
+    $(document).ready( function () {
+        $('#websites').DataTable({
+            responsive: true,
         });
-    </script>
+    });
+</script>
 @endsection

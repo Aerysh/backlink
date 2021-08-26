@@ -33,7 +33,7 @@
         </a>
     </li>
     <li>
-        <a href="" class="nav-link text-white">
+        <a href="{{ route('admin.admin_website_dashboard') }}" class="nav-link text-white">
             Website
         </a>
     </li>
