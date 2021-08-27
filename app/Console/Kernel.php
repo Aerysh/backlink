@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdatePublisherBalance::class,
+        Commands\CheckOrderDeadline::class,
     ];
 
     /**
@@ -26,6 +27,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
+        // This Schedule Check Order Deadline and Update Buyer Balance if their order is due
+        $schedule->command('checkOrderDeadline')->everyMinute();
+
+        // This Schedule Update Publisher Balance After Finishing An Order After 24 Hours
         $schedule->command('updatePublisherBalance')->daily();
     }
 
