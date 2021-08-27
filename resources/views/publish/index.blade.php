@@ -45,9 +45,11 @@
     </div>
     <div class="section py-5 border-bottom">
         <div class="section container">
-            <div class="row">
-                <div class="col-md-6 text-cetner">
-                    <img class="img-fluid" src="https://1.bp.blogspot.com/-p8DKixAJrvk/X6hwHnfY6VI/AAAAAAAAFJg/Xc1tkjD5nD0jxEuaBWXYE5vvh0GpTf0xACLcBGAsYHQ/s1280/teknik%2BOn%2Bpage%2BSEO.png" alt="///">
+            <div class="col-md-12 row">
+                <div class="col-md-6 mb-3">
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/SEO-cuate.svg') }}" class="img-fluid" width="400" height="400" alt="SEO Cuate">
+                    </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="text-center">

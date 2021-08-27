@@ -23,12 +23,12 @@
     <div class="section py-5 border-bottom">
         <div class="section container my-5">
             <div class="col-md-12 row">
-                <div class="col-md-6 d-flex align-self-center">
-                    <div class="align-items-center">
-                        <img src="{{asset('assets/img/whyUsLaptop.png')}}" class="img-fluid" alt="Gambar Laptop">
+                <div class="col-md-6 mb-3">
+                    <div class="text-center">
+                        <img src="{{asset('assets/img/SEO-amico.svg')}}" class="img-fluid" width="400" height="400" alt="SEO Amico">
                     </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
+                <div class="col-md-6 d-flex align-items-center mb-3">
                     <div>
                         <h4 class="fw-light">Mengapa Kami ?</h4>
                         <p class="lead text-muted">

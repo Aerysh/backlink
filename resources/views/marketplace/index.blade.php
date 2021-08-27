@@ -45,7 +45,7 @@
                                     </td>
                                     <td>{{ $popular->domain_authority }}</td>
                                     <td>{{ $popular->page_authority }}</td>
-                                    <td>{{ $popular->price }}</td>
+                                    <td>Rp. {{ $popular->price }}</td>
                                     <td>{{ $popular->delivery_time }} Hari</td>
                                     <td>
                                         <form action="{{route('cart.store_item', ['id' => $popular->id])}}" method="GET">
@@ -120,7 +120,7 @@
                                         </td>
                                         <td>{{ $new->domain_authority }}</td>
                                         <td>{{ $new->page_authority }}</td>
-                                        <td>Rp .{{ $new->price }}</td>
+                                        <td>Rp. {{ $new->price }}</td>
                                         <td>{{ $new->delivery_time }} Hari</td>
                                         <td>
                                             <form action="{{route('cart.store_item', ['id' => $new->id])}}" method="GET">
