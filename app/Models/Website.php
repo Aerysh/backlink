@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Kirschbaum\PowerJoins\PowerJoins;
+use Illuminate\Support\Facades\DB;
+
 
 class Website extends Model
 {
@@ -153,6 +155,16 @@ class Website extends Model
         }
 
         return $edit;
+    }
+
+    // Return Popular Website
+    public function getPopular()
+    {
+        return $this->join('order_website', 'order_website.website_id', '=', 'website.id')
+                    ->select('website.*', DB::raw('COUNT(order_website.website_id) as count'))
+                    ->groupBy('website.id')
+                    ->orderBy('count', 'desc')
+                    ->get();
     }
 
 }

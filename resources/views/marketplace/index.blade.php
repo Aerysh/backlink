@@ -27,39 +27,35 @@
                     <table class="table table-hover text-center w-100">
                         <thead>
                             <tr>
-                                <th hidden>#</th>
                                 <th>Website</th>
                                 <th>DA</th>
                                 <th>PA</th>
                                 <th>Harga</th>
+                                <th>Waktu Pengiriman</th>
                                 <th>Beli</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td hidden>1</td>
-                                <td><a class="text-dark" href="#">aerysh.xyz</a></td>
-                                <td>69</td>
-                                <td>60</td>
-                                <td>Rp. 50000</td>
-                                <td><a class="btn btn-outline-success" href="{{route('cart.index')}}">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
-                            </tr>
-                            <tr>
-                                <td hidden>2</td>
-                                <td><a class="text-dark" href="#">google.com</a></td>
-                                <td>68</td>
-                                <td>92</td>
-                                <td>Rp. 150000</td>
-                                <td><a class="btn btn-outline-success" href="#">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
-                            </tr>
-                            <tr>
-                                <td hidden>3</td>
-                                <td><a class="text-dark" href="#">facebook.com</a></td>
-                                <td>62</td>
-                                <td>63</td>
-                                <td>Rp. 100000</td>
-                                <td><a class="btn btn-outline-success" href="#">+ <i class="fas fa-shopping-cart"></i> Keranjang</a>
-                            </tr>
+                            @foreach ($populars as $popular)
+                                <tr>
+                                    <td>
+                                        <a href="{{route('info.website_details', ['id' => $popular->id])}}" class="text-dark">
+                                            {{ $popular->url }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $popular->domain_authority }}</td>
+                                    <td>{{ $popular->page_authority }}</td>
+                                    <td>{{ $popular->price }}</td>
+                                    <td>{{ $popular->delivery_time }} Hari</td>
+                                    <td>
+                                        <form action="{{route('cart.store_item', ['id' => $popular->id])}}" method="GET">
+                                            <button type="submit" class="btn btn-outline-success">
+                                                <span class="fas fa-shopping-cart"></span> Tambah
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

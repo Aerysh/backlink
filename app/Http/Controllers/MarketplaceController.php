@@ -33,7 +33,10 @@ class MarketplaceController extends Controller
         // Category
         $categories = Category::all();
 
-        return view('marketplace.index', compact('latest', 'cheapest', 'categories'));
+        // Popular
+        $populars = $this->websiteModel->getPopular();
+
+        return view('marketplace.index', compact('latest', 'cheapest', 'categories', 'populars'));
     }
 
     // Return search result
