@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Deposit;
 use Auth;
 use Illuminate\Support\Str;
+use ImageOptimizer;
 
 
 class DepositController extends Controller
@@ -91,6 +92,7 @@ class DepositController extends Controller
         $imageName = time().'_'.Str::random(10).'.'.$request->image->extension();
 
         $request->image->move(public_path('deposit_proof'), $imageName);
+        ImageOptimizer::optimize(public_path('deposit_proof'. '/' .$imageName));
 
         Deposit::where('id', $request->id)->update([
             'proof' =>  $imageName,

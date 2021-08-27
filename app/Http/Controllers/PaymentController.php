@@ -9,6 +9,8 @@ use Auth;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Str;
+use ImageOptimizer;
+
 
 
 
@@ -229,6 +231,8 @@ class PaymentController extends Controller
         $imageName = time().'_'.Str::random(10).'.'.$request->payment_proof->extension();
 
         $request->payment_proof->move(public_path('payment_proof'), $imageName);
+
+        ImageOptimizer::optimize(public_path('payment_proof'. '/' .$imageName));
 
         Payment::where('id', $request->id)->update([
             'proof' =>  $imageName,
